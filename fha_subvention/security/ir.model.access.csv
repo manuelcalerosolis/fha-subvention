@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fha_subvention,access_fha_subvention,model_fha_subvention,base.group_user,1,0,0,0
+access_fha_subvention_create,access_fha_subvention create,model_fha_subvention,fha_subvention.group_fha_create_subvention,1,1,1,1
+access_fha_subvention_concept,access_fha_subvention_concept,model_fha_subvention_concept,base.group_user,1,1,1,1
+access_fha_subvention_code,access_fha_subvention_code,model_fha_subvention_code,base.group_user,1,1,1,1
+access_fha_subvention_item,access_fha_subvention_item,model_fha_subvention_item,base.group_user,1,1,1,1
+access_fha_subvention_expense,access_fha_subvention_expense,model_fha_subvention_expense,base.group_user,1,1,1,1
