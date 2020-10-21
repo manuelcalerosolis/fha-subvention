@@ -10,10 +10,6 @@
                         <field name="name"/>
                         <field name="code_id"/>
                     </group>
-                    <widget name="beep" auto_play="1"/>
-                    <button name="action_beep"
-                            string="Info"
-                            type="object"/>
                     <div class="oe_chatter">
                         <field name="message_follower_ids" widget="mail_followers"/>
                         <field name="activity_ids" widget="mail_activity"/>

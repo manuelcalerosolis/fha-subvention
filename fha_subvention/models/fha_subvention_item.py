@@ -70,7 +70,10 @@ class FhaSubventionItem(models.Model):
 
     def _compute_percentage_expense(self):
         for record in self:
-            record.percentage_expense = record.total_expense / record.total_subvention * 100
+            if record.total_subvention != 0:
+                record.percentage_expense = record.total_expense / record.total_subvention * 100
+            else:
+                record.percentage_expense = 0
 
     def action_show_expenses(self):
         '''
