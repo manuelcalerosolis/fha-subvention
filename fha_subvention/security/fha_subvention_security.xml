@@ -1,20 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="0">
+<!--    <data noupdate="0">-->
 
-        <record id="fha_subvention.group_fha_create_subvention" model="res.groups">
-            <field name="name">Create Subvention</field>
-            <field name="category_id" ref="base.module_category_hidden"/>
+<!--        <record id="fha_subvention.group_fha_create_subvention" model="res.groups">-->
+<!--            <field name="name">Create Subvention</field>-->
+<!--            <field name="category_id" ref="base.module_category_hidden"/>-->
+<!--        </record>-->
+
+        <record id="fha_subvention.module_category_subvention" model="ir.module.category">
+            <field name="name">Subventions</field>
+            <field name="description">Helps you handle your subventions.</field>
+            <field name="sequence">1</field>
         </record>
 
-    </data>
-
-    <data noupdate="1">
-
-        <record id="fha_subvention.group_fha_create_subvention" model="res.groups">
-            <field name="name">Create Subvention</field>
-            <field name="category_id" ref="base.module_category_hidden"/>
+        <record id="group_fha_user_subvention" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="fha_subvention.module_category_subvention"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="comment">the user will have access to subventions.</field>
         </record>
 
-    </data>
+        <record id="group_fha_administrator_subvention" model="res.groups">
+            <field name="name">Administrator</field>
+            <field name="category_id" ref="fha_subvention.module_category_subvention"/>
+            <field name="implied_ids" eval="[(4, ref('group_fha_user_subvention'))]"/>
+            <field name="comment">the user will have access to create, update and delete subventions.</field>
+        </record>
+
+<!--    </data>-->
+
+<!--    <data noupdate="1">-->
+
+<!--        <record id="fha_subvention.group_fha_create_subvention" model="res.groups">-->
+<!--            <field name="name">Create Subvention</field>-->
+<!--            <field name="category_id" ref="base.module_category_hidden"/>-->
+<!--        </record>-->
+
+<!--        <record id="fha_subvention.module_category_subvention" model="ir.module.category">-->
+<!--            <field name="description">Helps you handle your subventions.</field>-->
+<!--            <field name="sequence">1</field>-->
+<!--        </record>-->
+
+<!--        <record id="group_fha_access_subvention" model="res.groups">-->
+<!--            <field name="name">User</field>-->
+<!--            <field name="category_id" ref="fha_subvention.module_category_subvention"/>-->
+<!--            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>-->
+<!--            <field name="comment">the user will have access to subventions.</field>-->
+<!--        </record>-->
+
+<!--        <record id="group_fha_create_subvention" model="res.groups">-->
+<!--            <field name="name">Master</field>-->
+<!--            <field name="category_id" ref="fha_subvention.module_category_subvention"/>-->
+<!--            <field name="implied_ids" eval="[(4, ref('group_fha_access_subvention'))]"/>-->
+<!--            <field name="comment">the user will have access to create, update and delete subventions.</field>-->
+<!--        </record>-->
+
+<!--    </data>-->
+
 </odoo>
+
+
+
