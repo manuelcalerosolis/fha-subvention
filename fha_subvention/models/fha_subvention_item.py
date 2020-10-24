@@ -81,7 +81,7 @@ class FhaSubventionItem(models.Model):
         '''
         self.ensure_one()
         # Get the view
-        view = self.env.ref('fha_subvention.view_subvention_items_operations')
+        view = self.env.ref('note_private_group.view_subvention_items_operations')
         return {
             'name': _('Expenses'),
             'type': 'ir.actions.act_window',
