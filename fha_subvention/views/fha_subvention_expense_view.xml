@@ -7,11 +7,12 @@
             <form string="Define Subvention Expense">
                 <sheet>
                     <group>
+                        <field name="subvention_id"/>
+                        <field name="item_id"/>
                         <field name="name"
                                default_focus="1"
                                placeholder="Expense description"/>
                         <field name="date"/>
-                        <field name="item_id"/>
                         <field name="currency_id" invisible="1"/>
                         <field name="total_expense"
                                class="oe_inline"
@@ -28,16 +29,16 @@
         </field>
     </record>
 
-    <record id="fha_subvention_expense_view_kanban" model="ir.ui.view" >
+    <record id="fha_subvention_expense_view_kanban" model="ir.ui.view">
         <field name="name">Subvention View</field>
         <field name="model">fha.subvention.expense</field>
         <field name="arch" type="xml">
             <kanban class="o_kanban_mobile">
                 <field name="currency_id" invisible="1"/>
                 <field name="item_id"/>
-                <field name="name" />
-                <field name="date" />
-                <field name="total_expense" />
+                <field name="name"/>
+                <field name="date"/>
+                <field name="total_expense"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
@@ -49,9 +50,10 @@
                                     </strong>
                                     <ul>
                                         <li>
-                                            Expense : <field name="total_expense"
-                                                             widget="monetary"
-                                                             options="{'currency_field': 'currency_id'}" />
+                                            Expense :
+                                            <field name="total_expense"
+                                                   widget="monetary"
+                                                   options="{'currency_field': 'currency_id'}"/>
                                         </li>
                                     </ul>
                                 </div>
@@ -69,12 +71,29 @@
         <field name="arch" type="xml">
             <tree string="Subventions Expenses">
                 <field name="currency_id" invisible="1"/>
-                <field name="name" />
-                <field name="date" />
+                <field name="subvention_id"/>
+                <field name="item_id"/>
+                <field name="name"/>
+                <field name="date"/>
                 <field name="total_expense"
                        widget="monetary"
-                       options="{'currency_field': 'currency_id'}" />
+                       options="{'currency_field': 'currency_id'}"/>
             </tree>
+        </field>
+    </record>
+
+    <record id="fha_subvention_expense_view_filter" model="ir.ui.view">
+        <field name="name">fha.subvention.expense.view.filter</field>
+        <field name="model">fha.subvention.expense</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <search string="Search Expense">
+                <filter string="Date" name="filter_create_date" date="date"/>
+                <group expand="0" string="Group By">
+                    <filter string="Subvention" name="subvention" context="{'group_by': 'subvention_id'}"/>
+                    <filter string="Item" name="item" context="{'group_by': 'item_id'}"/>
+                </group>
+            </search>
         </field>
     </record>
 
@@ -83,7 +102,8 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">fha.subvention.expense</field>
         <field name="view_mode">tree,form,kanban</field>
-        <field name="view_id" ref="fha_subvention_expense_view_tree" />
+        <field name="view_id" ref="fha_subvention_expense_view_tree"/>
+        <field name="search_view_id" ref="fha_subvention_expense_view_filter"/>
     </record>
 
     <menuitem id="fha_subvention_menu_subvention_expense"

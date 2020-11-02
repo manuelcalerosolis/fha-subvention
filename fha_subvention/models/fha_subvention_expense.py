@@ -18,6 +18,12 @@ class FhaSubventionExpense(models.Model):
         string='Item',
         track_visibility='always',
     )
+    subvention_id = fields.Many2one(
+        string="Subvention",
+        related='item_id.subvention_id',
+        store=True,
+        readonly=True,
+    )
     name = fields.Char(
         string='Name',
         help='Expense Description',
@@ -44,3 +50,14 @@ class FhaSubventionExpense(models.Model):
         currency_field='currency_id',
         track_visibility='always',
     )
+    item_concept_name = fields.Char(
+        'Subvention Concept',
+        compute='_compute_complete_name',
+        store=True
+    )
+
+    @api.depends('item_id')
+    def _compute_complete_name(self):
+        for expense in self:
+            expense.item_concept_name = '%s %s - %s' % (
+            expense.item_id.subvention_id.name, expense.item_id.subvention_id.code, expense.item_id.concept_id.name)
