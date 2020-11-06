@@ -5,25 +5,44 @@ from datetime import datetime, timedelta
 
 from odoo import api, fields, models
 
-
-class FhaSubventionCode(models.Model):
+class FhaSubventionTag(models.Model):
     _name = "fha.subvention.code"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
 
     _description = "Subvention Code"
 
-    _sql_constraints = [("unique_code", "UNIQUE(code)", "Code must be unique")]
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', "Code name already exists !"),
+    ]
 
     name = fields.Char(
-        string="Name",
-        help="Name of subvention code.",
+        string="Code Name",
         required=True,
-        index=True,
-        track_visibility="always",
     )
-    code = fields.Char(
-        string="Code",
-        required=True,
-        copy=False,
-        track_visibility="always",
+    color = fields.Integer(
+        string='Color Index',
     )
+
+#
+# Deprecated
+#
+# class FhaSubventionCode(models.Model):
+#     _name = "fha.subvention.code"
+#     _inherit = ["mail.thread", "mail.activity.mixin"]
+#
+#     _description = "Subvention Code"
+#
+#     _sql_constraints = [("unique_code", "UNIQUE(code)", "Code must be unique")]
+#
+#     name = fields.Char(
+#         string="Name",
+#         help="Name of subvention code.",
+#         required=True,
+#         index=True,
+#         track_visibility="always",
+#     )
+#     code = fields.Char(
+#         string="Code",
+#         required=True,
+#         copy=False,
+#         track_visibility="always",
+#     )

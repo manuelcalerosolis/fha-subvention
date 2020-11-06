@@ -1,9 +1,8 @@
 # Copyright 2020 Xtendoo Corporation
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from datetime import datetime, timedelta
-
 from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class FhaSubventionConcept(models.Model):
@@ -20,35 +19,14 @@ class FhaSubventionConcept(models.Model):
         index=True,
         track_visibility="always",
     )
-    code_id = fields.Many2one(
-        "fha.subvention.code",
-        store=True,
-        required=True,
+    code_ids = fields.Many2many(
         string="Code",
-        track_visibility="always",
+        comodel_name='fha.subvention.code',
+        required=True,
     )
 
-    def action_global(self):
-        self.action_beep()
-        self.action_notification()
-        return
-
-    def action_notification(self):
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'display_notification',
-            'params': {
-                'type': 'danger',
-                'title': _("Connection Test Succeeded!"),
-                'message': _("Everything seems properly set up!"),
-                'sticky': False,
-            }
-        }
-
-    def action_beep(self):
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'beep.action',
-            'params': {}
-        }
-
+    @api.constrains('code_ids')
+    def _check_tags(self):
+        for record in self:
+            if len(record.code_ids) > 1:
+                raise ValidationError(_("Error! more than one code is not allowed"))

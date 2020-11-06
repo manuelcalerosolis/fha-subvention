@@ -8,7 +8,9 @@
                 <sheet>
                     <group>
                         <field name="name"/>
-                        <field name="code_id"/>
+                        <field name="code_ids"
+                               widget="many2many_tags"
+                               options="{'color_field': 'color', 'no_create_edit': True}"/>
                     </group>
                     <div class="oe_chatter">
                         <field name="message_follower_ids" widget="mail_followers"/>
@@ -20,20 +22,23 @@
         </field>
     </record>
 
-    <record id="fha_subvention_concept_view_kanban" model="ir.ui.view" >
+    <record id="fha_subvention_concept_view_kanban" model="ir.ui.view">
         <field name="name">Subvention concept View</field>
         <field name="model">fha.subvention.concept</field>
         <field name="arch" type="xml">
             <kanban class="o_kanban_mobile">
                 <field name="name"/>
-                <field name="code_id"/>
+                <field name="code_ids"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
                             <div class="row mb4">
                                 <div class="oe_kanban_details col-6">
                                     <strong>
-                                        <span t-esc="record.name.value"/> [ <span t-esc="record.code_id.value"/> ]
+                                        <span t-esc="record.name.value"/>
+                                        [
+                                        <span t-esc="record.code_ids.value"/>
+                                        ]
                                     </strong>
                                 </div>
                             </div>
@@ -49,8 +54,8 @@
         <field name="model">fha.subvention.concept</field>
         <field name="arch" type="xml">
             <tree string="Subventions">
-                <field name="name" />
-                <field name="code_id" />
+                <field name="name"/>
+                <field name="code_ids"/>
             </tree>
         </field>
     </record>
@@ -60,14 +65,14 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">fha.subvention.concept</field>
         <field name="view_mode">tree,form,kanban</field>
-        <field name="view_id" ref="fha_subvention_concept_view_tree" />
+        <field name="view_id" ref="fha_subvention_concept_view_tree"/>
     </record>
 
     <menuitem id="fha_subvention_concept_menu_subvention"
-        name="Subvention concept"
-        action="fha_subvention_concept_action"
-        parent="fha_subvention_menu_configuration"
-        sequence="2"
+              name="Subvention concept"
+              action="fha_subvention_concept_action"
+              parent="fha_subvention_menu_configuration"
+              sequence="2"
     />
 
 </odoo>

@@ -24,6 +24,13 @@ class FhaSubventionExpense(models.Model):
         store=True,
         readonly=True,
     )
+    line_id = fields.Many2one(
+        comodel_name='account.move.line',
+        store=True,
+        required=True,
+        string='Account Line',
+        track_visibility='always',
+    )
     name = fields.Char(
         string='Name',
         help='Expense Description',
