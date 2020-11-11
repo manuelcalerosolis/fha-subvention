@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_account_analytic_account_form" model="ir.ui.view">
+        <field name="name">analytic.analytic.account.form</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="after">
+                <div>
+                    <label for="subvention">
+                        Subvention
+                    </label>
+                    <field name="subvention"
+                           widget="boolean_toggle"/>
+                </div>
+                <group attrs="{'invisible': [('subvention', '=', False)]}">
+                    <group>
+                        <field name="percentage" string="Percentage %" />
+                        <field name="total_subvention" widget="monetary" />
+                        <field name="total_expense" widget="monetary" />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
+
+
+
