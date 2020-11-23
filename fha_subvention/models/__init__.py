@@ -1,4 +1,4 @@
-from . import analytic_account
+from . import account_analytic_group
 from . import account_analytic_account
 from . import fha_subvention_code
 # from . import fha_subvention_tag

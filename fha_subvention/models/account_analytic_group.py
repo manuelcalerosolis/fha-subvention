@@ -64,12 +64,12 @@ class AccountAnalyticGroup(models.Model):
         currency_field='currency_id',
         track_visibility="always",
     )
-    # subvention_item_ids = fields.One2many(
-    #     comodel_name="fha.subvention.item",
-    #     inverse_name="subvention_id",
-    #     string='Subvention items',
-    #     track_visibility="always",
-    # )
+    account_analytic_account_ids = fields.One2many(
+         comodel_name="account.analytic.account",
+         inverse_name="group_id",
+         string='Subvention items',
+         track_visibility="always",
+    )
 
     @api.onchange('percentage')
     def on_change_percentage(self):

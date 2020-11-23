@@ -12,7 +12,7 @@
         'security/fha_subvention_security.xml',
         'security/ir.model.access.csv',
         'views/account_analityc_account_view.xml',
-        'views/analityc_account_view.xml',
+        'views/account_analityc_group_view.xml',
         'views/fha_subvention_view.xml',
         'views/fha_subvention_code_view.xml',
         'views/fha_subvention_concept_view.xml',

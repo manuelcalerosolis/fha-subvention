@@ -25,6 +25,49 @@
         </field>
     </record>
 
+    <record id="view_account_analytic_line" model="ir.ui.view">
+        <field name="name">account.analytic.line.form</field>
+        <field name="model">account.analytic.account</field>
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+            <form string="Account Analytic Line">
+                <group>
+                    <group>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="concept_id" readonly="1"/>
+                        <field name="percentage" string="Percentage %" readonly="1"/>
+                        <field name="total_subvention" readonly="1"/>
+                    </group>
+                </group>
+                <notebook position="inside">
+                    <page string="Expenses" name="expense">
+                        <field name="account_analytic_line_ids"
+                               context="{'tree_view_ref': 'fha_subvention.view_account_analytic_line_ids_tree'}"/>
+                    </page>
+                </notebook>
+                <footer class="oe_edit_only">
+                    <button string="Confirm" special="save" class="oe_highlight"/>
+                    <button string="Discard" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_account_analytic_line_ids_tree" model="ir.ui.view">
+        <field name="name">fha.account.analytic.line.tree</field>
+        <field name="model">account.analytic.line</field>
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="item_id" invisible="1" force_save="1"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="name"/>
+                <field name="date"/>
+                <field name="total_expense" sum="Total" widget="monetary"/>
+            </tree>
+        </field>
+    </record>
+
 </odoo>
 
 

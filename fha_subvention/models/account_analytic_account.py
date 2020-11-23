@@ -9,7 +9,7 @@ class AccountAnalyticAccount(models.Model):
 
     subvention = fields.Boolean(
         string="Subvention",
-        default=False,
+        default=True,
     )
     currency_id = fields.Many2one(
         comodel_name='res.currency',
@@ -41,6 +41,12 @@ class AccountAnalyticAccount(models.Model):
         compute='_compute_percentage_expense',
         help='Percentage of expense in this item',
     )
+    account_analytic_line_ids = fields.One2many(
+         comodel_name="account.analytic.line",
+         inverse_name="account_id",
+         string='Account Analytic Line',
+         track_visibility="always",
+    )
 
     def _compute_total_expense(self):
         for record in self:
@@ -49,3 +55,24 @@ class AccountAnalyticAccount(models.Model):
     def _compute_percentage_expense(self):
         for record in self:
             record.percentage_expense = 0
+
+    def action_show_expenses(self):
+        '''
+        Open the expenses wizard
+        '''
+        self.ensure_one()
+        # Get the view
+        view = self.env.ref('fha_subvention.view_account_analytic_line')
+        return {
+            'name': _('Account Analytic Line'),
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'res_model': 'account.analytic.account',
+            'views': [(view.id, 'form')],
+            'view_id': view.id,
+            'target': 'new',
+            'res_id': self.id,
+            'context': dict(
+                self.env.context
+            ),
+        }

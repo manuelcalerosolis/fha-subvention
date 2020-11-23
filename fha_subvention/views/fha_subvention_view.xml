@@ -158,7 +158,7 @@
 
     <record id="fha_subvention_view_tree" model="ir.ui.view">
         <field name="name">fha.subvention.tree</field>
-        <field name="model">fha.subvention</field>
+        <field name="model">account.analytic.group</field>
         <field name="arch" type="xml">
             <tree string="Subventions">
                 <field name="name" />
@@ -235,7 +235,7 @@
     <record id="fha_subvention_action" model="ir.actions.act_window">
         <field name="name">Subvention</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">fha.subvention</field>
+        <field name="res_model">account.analytic.group</field>
         <field name="view_mode">tree,form,kanban</field>
         <field name="view_id" ref="fha_subvention_view_tree" />
         <field name="search_view_id" ref="fha_subvention_view_filter"/>
