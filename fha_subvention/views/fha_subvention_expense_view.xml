@@ -97,21 +97,7 @@
         </field>
     </record>
 
-    <record id="fha_subvention_expense_action" model="ir.actions.act_window">
-        <field name="name">Subvention Expense</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">fha.subvention.expense</field>
-        <field name="view_mode">tree,form,kanban</field>
-        <field name="view_id" ref="fha_subvention_expense_view_tree"/>
-        <field name="search_view_id" ref="fha_subvention_expense_view_filter"/>
-    </record>
 
-    <menuitem id="fha_subvention_menu_subvention_expense"
-              name="Subvention Expense"
-              action="fha_subvention_expense_action"
-              parent="fha_subvention_menu_subvention"
-              sequence="3"
-    />
 
 </odoo>
 

@@ -7,13 +7,7 @@
         <field name="inherit_id" ref="analytic.account_analytic_group_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//form/sheet/group[2]" position="after">
-                <div>
-                    <label for="subvention">
-                        Subvention
-                    </label>
-                    <field name="subvention"
-                           widget="boolean_toggle"/>
-                </div>
+                <field name="subvention" invisible="1"/>
                 <group attrs="{'invisible': [('subvention', '=', False)]}">
                     <group>
                         <field name="code"/>
@@ -49,7 +43,6 @@
                                 <field name="currency_id" invisible="1" />
                                 <field name="name" />
                                 <field name="code" />
-                                <field name="parent_id" />
                                 <field name="percentage" string="Percentage %" />
                                 <field name="total_subvention" sum="Total" widget="monetary" />
                                 <field name="total_expense" sum="Total" widget="monetary" />

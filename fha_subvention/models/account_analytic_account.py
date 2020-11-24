@@ -50,11 +50,14 @@ class AccountAnalyticAccount(models.Model):
 
     def _compute_total_expense(self):
         for record in self:
-            record.total_expense = 0
+            record.total_expense = sum(record.account_analytic_line_ids.mapped('amount'))
 
     def _compute_percentage_expense(self):
         for record in self:
-            record.percentage_expense = 0
+            if record.total_subvention != 0:
+                record.percentage_expense = record.total_expense / record.total_subvention * 100
+            else:
+                record.percentage_expense = 0
 
     def action_show_expenses(self):
         '''

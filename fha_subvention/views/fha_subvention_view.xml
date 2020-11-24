@@ -217,6 +217,37 @@
         </field>
     </record>
 
+    <record id="fha_subvention_account_analytic_account_view_tree" model="ir.ui.view">
+        <field name="name">fha.subvention.account.analytic.account.view.tree</field>
+        <field name="model">account.analytic.account</field>
+        <field name="arch" type="xml">
+            <tree string="Subventions Expenses">
+                <field name="currency_id" invisible="1"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="debit" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="credit" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="balance" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="fha_subvention_account_analytic_account_view_filter" model="ir.ui.view">
+        <field name="name">fha.subvention.account.analytic.account.view.filter</field>
+        <field name="model">account.analytic.account</field>
+        <field name="arch" type="xml">
+            <search string="Analytic Account">
+                <field name="name" filter_domain="['|', ('name', 'ilike', self), ('code', 'ilike', self)]" string="Analytic Account"/>
+                <field name="partner_id"/>
+                <separator/>
+                <filter string="Archived" domain="[('active', '=', False)]" name="inactive"/>
+                <group expand="0" string="Group By...">
+                    <filter string="Associated Partner" name="associatedpartner" domain="[]" context="{'group_by': 'partner_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="view_expense_ids_tree" model="ir.ui.view">
         <field name="name">fha.subvention.expense.tree</field>
         <field name="model">fha.subvention.expense</field>
@@ -265,6 +296,31 @@
         name="Configuration"
         parent="fha_subvention_menu"
         sequence="2"
+    />
+
+<!--    <record id="fha_subvention_expense_action" model="ir.actions.act_window">-->
+<!--        <field name="name">Subvention Expense</field>-->
+<!--        <field name="type">ir.actions.act_window</field>-->
+<!--        <field name="res_model">account.analytic.account</field>-->
+<!--        <field name="view_mode">tree,form,kanban</field>-->
+<!--        <field name="view_id" ref="fha_subvention_account_analytic_account_view_tree"/>-->
+<!--        <field name="search_view_id" ref="fha_subvention_account_analytic_account_view_filter"/>-->
+<!--    </record>-->
+
+    <record id="fha_subvention_expense_action" model="ir.actions.act_window">
+        <field name="name">Subvention Expense</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.analytic.account</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_id" ref="fha_subvention_account_analytic_account_view_tree"/>
+        <field name="search_view_id" ref="fha_subvention_account_analytic_account_view_filter"/>
+    </record>
+
+    <menuitem id="fha_subvention_menu_subvention_expense"
+              name="Subvention Expense"
+              action="fha_subvention_expense_action"
+              parent="fha_subvention_menu_subvention"
+              sequence="3"
     />
 
 </odoo>

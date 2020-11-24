@@ -11,7 +11,7 @@ class AccountAnalyticGroup(models.Model):
 
     subvention = fields.Boolean(
         string="Subvention",
-        default=False,
+        default=True,
     )
     code = fields.Char(
         string="Subvention Code",
