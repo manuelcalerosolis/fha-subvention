@@ -76,6 +76,8 @@
         <field name="view_mode">tree,form,kanban</field>
         <field name="view_id" ref="fha_subvention_view_tree"/>
         <field name="search_view_id" ref="fha_subvention_view_filter"/>
+        <field name="context">{'in_subvention_app': True}</field>
+        <field name="domain">[('subvention', '=', True)]</field>
     </record>
 
     <record id="fha_subvention_expense_action" model="ir.actions.act_window">
@@ -85,33 +87,38 @@
         <field name="view_mode">tree,form,kanban</field>
         <field name="view_id" ref="fha_subvention_account_analytic_account_view_tree"/>
         <field name="search_view_id" ref="fha_subvention_account_analytic_account_view_filter"/>
+        <field name="context">{'in_subvention_app': True}</field>
+        <field name="domain">[('subvention', '=', True)]</field>
     </record>
 
-    <menuitem name="Subvention"
+    <menuitem name="Subventions"
               id="fha_subvention_menu"
               sequence="1"
               web_icon="fha_subvention,static/description/icon.png"
-              groups="base.group_user"
+              groups="fha_subvention.group_fha_user_subvention"
     />
 
     <menuitem id="fha_subvention_menu_subvention"
-              name="Subvention"
+              name="Subventions"
               parent="fha_subvention_menu"
               sequence="2"
+              groups="fha_subvention.group_fha_user_subvention"
     />
 
     <menuitem id="fha_subvention_menu_subvention_subvention"
-              name="Subvention"
+              name="Subventions"
               action="fha_subvention_action"
               parent="fha_subvention_menu_subvention"
               sequence="2"
+              groups="fha_subvention.group_fha_administrator_subvention"
     />
 
     <menuitem id="fha_subvention_menu_subvention_expense"
-              name="Subvention Expense"
+              name="Subventions Expenses"
               action="fha_subvention_expense_action"
               parent="fha_subvention_menu_subvention"
               sequence="3"
+              groups="fha_subvention.group_fha_user_subvention"
     />
 
 </odoo>

@@ -7,9 +7,12 @@ from odoo import api, fields, models, _
 class AccountAnalyticAccount(models.Model):
     _inherit = 'account.analytic.account'
 
+    def _get_default_subvention(self):
+        return self._context.get('in_subvention_app', False)
+
     subvention = fields.Boolean(
         string="Subvention",
-        default=True,
+        default=_get_default_subvention,
     )
     currency_id = fields.Many2one(
         comodel_name='res.currency',
@@ -55,7 +58,7 @@ class AccountAnalyticAccount(models.Model):
     def _compute_percentage_expense(self):
         for record in self:
             if record.total_subvention != 0:
-                record.percentage_expense = record.total_expense / record.total_subvention * 100
+                record.percentage_expense = abs(record.total_expense) / record.total_subvention * 100
             else:
                 record.percentage_expense = 0
 

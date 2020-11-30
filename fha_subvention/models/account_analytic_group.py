@@ -9,9 +9,17 @@ class AccountAnalyticGroup(models.Model):
     _name = 'account.analytic.group'
     _inherit = ['account.analytic.group', 'mail.thread', 'mail.activity.mixin']
 
+    is_readonly = fields.Boolean(
+        string="Read Only",
+        compute='_compute_readonly_subvention',
+    )
+
+    def _get_default_subvention(self):
+        return self._context.get('in_subvention_app', False)
+
     subvention = fields.Boolean(
         string="Subvention",
-        default=True,
+        default=_get_default_subvention,
     )
     code = fields.Char(
         string="Subvention Code",
@@ -70,6 +78,10 @@ class AccountAnalyticGroup(models.Model):
          string='Subvention items',
          track_visibility="always",
     )
+
+    def _compute_readonly_subvention(self):
+        for record in self:
+            record.is_readonly = not self.env.user.has_group('fha_subvention.group_fha_administrator_subvention')
 
     @api.onchange('percentage')
     def on_change_percentage(self):

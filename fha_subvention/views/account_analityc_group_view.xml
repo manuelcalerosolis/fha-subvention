@@ -8,32 +8,41 @@
         <field name="arch" type="xml">
             <xpath expr="//form/sheet/group[2]" position="after">
                 <field name="subvention" invisible="1"/>
+                <field name="is_readonly" invisible="1"/>
                 <group attrs="{'invisible': [('subvention', '=', False)]}">
                     <group>
-                        <field name="code"/>
-                        <field name="partner_id"/>
+                        <field name="code"
+                               attrs="{'readonly':[('is_readonly','=', True)]}"/>
+                        <field name="partner_id"
+                               attrs="{'readonly':[('is_readonly','=', True)]}"/>
                     </group>
                     <group>
-                        <field name="date_init"/>
-                        <field name="date_end"/>
+                        <field name="date_init"
+                               attrs="{'readonly':[('is_readonly','=', True)]}"/>
+                        <field name="date_end"
+                               attrs="{'readonly':[('is_readonly','=', True)]}"/>
                     </group>
                     <group>
                         <field name="currency_id" invisible="1"/>
                         <field name="total_subvention"
                                class="oe_inline"
                                widget="monetary"
-                               options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                               options="{'currency_field': 'currency_id', 'field_digits': True}"
+                               attrs="{'readonly':[('is_readonly','=', True)]}"/>
                         <field name="percentage"
                                style="width: 117px"
-                               string="Percentage %"/>
+                               string="Percentage %"
+                               attrs="{'readonly':[('is_readonly','=', True)]}"/>
                         <field name="annual_subvention"
                                class="oe_inline"
                                widget="monetary"
-                               options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                               options="{'currency_field': 'currency_id', 'field_digits': True}"
+                               attrs="{'readonly':[('is_readonly','=', True)]}"/>
                         <field name="annual_spend"
                                class="oe_inline"
                                widget="monetary"
-                               options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                               options="{'currency_field': 'currency_id', 'field_digits': True}"
+                               attrs="{'readonly':[('is_readonly','=', True)]}"/>
                     </group>
                 </group>
                 <notebook position="inside">

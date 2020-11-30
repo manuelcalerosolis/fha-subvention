@@ -7,12 +7,7 @@
         <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
         <field name="arch" type="xml">
             <xpath expr="//form/sheet/group[1]" position="after">
-                <div>
-                    <label for="subvention">
-                        Subvention
-                    </label>
-                    <field name="subvention" invisible="1" />
-                </div>
+                <field name="subvention" invisible="1" />
                 <group attrs="{'invisible': [('subvention', '=', False)]}">
                     <group>
                         <field name="percentage" string="Percentage %" />
