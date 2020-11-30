@@ -3,6 +3,7 @@
 
 from datetime import date
 from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 
 class AccountAnalyticGroup(models.Model):
@@ -82,6 +83,13 @@ class AccountAnalyticGroup(models.Model):
     def _compute_readonly_subvention(self):
         for record in self:
             record.is_readonly = not self.env.user.has_group('fha_subvention.group_fha_administrator_subvention')
+
+    @api.model
+    def default_get(self, fields):
+        res = super().default_get(fields)
+        if not self.env.user.has_group('fha_subvention.group_fha_administrator_subvention'):
+            raise UserError(_("You have not permission to create Subventions"))
+        return res
 
     @api.onchange('percentage')
     def on_change_percentage(self):
