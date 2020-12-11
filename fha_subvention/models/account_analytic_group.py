@@ -1,24 +1,26 @@
 # Copyright 2020 Xtendoo Corporation
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
+from datetime import date
 from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 
-class FhaSubvention(models.Model):
-    _name = "fha.subvention"
+class AccountAnalyticGroup(models.Model):
+    _name = 'account.analytic.group'
+    _inherit = ['account.analytic.group', 'mail.thread', 'mail.activity.mixin']
 
-    _inherit = ["mail.thread", "mail.activity.mixin"]
+    is_readonly = fields.Boolean(
+        string="Read Only",
+        compute='_compute_readonly_subvention',
+    )
 
-    _description = "Subvention"
+    def _get_default_subvention(self):
+        return self._context.get('in_subvention_app', False)
 
-    _sql_constraints = [("unique_code", "UNIQUE(code)", "Code must be unique")]
-
-    name = fields.Char(
-        string="Subvention Name",
-        help="Name of subvention.",
-        required=True,
-        index=True,
-        track_visibility="always",
+    subvention = fields.Boolean(
+        string="Subvention",
+        default=_get_default_subvention,
     )
     code = fields.Char(
         string="Subvention Code",
@@ -31,22 +33,19 @@ class FhaSubvention(models.Model):
     date_init = fields.Date(
         string="Init Date",
         required=True,
-        track_visibility="always"
+        track_visibility="always",
+        default=lambda d: date(date.today().year, 1, 1),
     )
     date_end = fields.Date(
         string="End Date",
         required=True,
         track_visibility="always",
+        default=lambda d: date(date.today().year, 12, 31),
     )
     partner_id = fields.Many2one(
         'res.partner',
         string='Entity',
         track_visibility="always",
-    )
-    description = fields.Text(
-        String="Subvention Description",
-        help="Description of subvention.",
-        track_visibility="always"
     )
     currency_id = fields.Many2one(
         comodel_name='res.currency',
@@ -74,12 +73,23 @@ class FhaSubvention(models.Model):
         currency_field='currency_id',
         track_visibility="always",
     )
-    subvention_item_ids = fields.One2many(
-        comodel_name="fha.subvention.item",
-        inverse_name="subvention_id",
-        string='Subvention items',
-        track_visibility="always",
+    account_analytic_account_ids = fields.One2many(
+         comodel_name="account.analytic.account",
+         inverse_name="group_id",
+         string='Subvention items',
+         track_visibility="always",
     )
+
+    def _compute_readonly_subvention(self):
+        for record in self:
+            record.is_readonly = not self.env.user.has_group('fha_subvention.group_fha_administrator_subvention')
+
+    @api.model
+    def default_get(self, fields):
+        res = super().default_get(fields)
+        if not self.env.user.has_group('fha_subvention.group_fha_administrator_subvention'):
+            raise UserError(_("You have not permission to create Subventions"))
+        return res
 
     @api.onchange('percentage')
     def on_change_percentage(self):
