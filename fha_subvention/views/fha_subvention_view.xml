@@ -78,6 +78,7 @@
         <field name="search_view_id" ref="fha_subvention_view_filter"/>
         <field name="context">{'in_subvention_app': True}</field>
         <field name="domain">[('subvention', '=', True)]</field>
+<<<<<<< HEAD
     </record>
 
     <record id="fha_subvention_expense_action" model="ir.actions.act_window">
@@ -91,6 +92,21 @@
         <field name="domain">[('subvention', '=', True)]</field>
     </record>
 
+=======
+    </record>
+
+    <record id="fha_subvention_expense_action" model="ir.actions.act_window">
+        <field name="name">Subvention Expense</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.analytic.account</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_id" ref="fha_subvention_account_analytic_account_view_tree"/>
+        <field name="search_view_id" ref="fha_subvention_account_analytic_account_view_filter"/>
+        <field name="context">{'in_subvention_app': True}</field>
+        <field name="domain">[('subvention', '=', True)]</field>
+    </record>
+
+>>>>>>> 22e0175a10ec3e54fa6fa685cbca031b75f21675
     <menuitem name="Subventions"
               id="fha_subvention_menu"
               sequence="1"
@@ -111,6 +127,17 @@
               parent="fha_subvention_menu_subvention"
               sequence="2"
               groups="fha_subvention.group_fha_administrator_subvention"
+<<<<<<< HEAD
+=======
+    />
+
+    <menuitem id="fha_subvention_menu_subvention_expense"
+              name="Subventions Expenses"
+              action="fha_subvention_expense_action"
+              parent="fha_subvention_menu_subvention"
+              sequence="3"
+              groups="fha_subvention.group_fha_user_subvention"
+>>>>>>> 22e0175a10ec3e54fa6fa685cbca031b75f21675
     />
 
 </odoo>

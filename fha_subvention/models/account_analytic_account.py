@@ -6,7 +6,6 @@ from odoo import api, fields, models, _
 
 class AccountAnalyticAccount(models.Model):
     _inherit = 'account.analytic.account'
-    _rec_name = 'complete_name'
 
     def _get_default_subvention(self):
         return self._context.get('in_subvention_app', False)
@@ -14,11 +13,6 @@ class AccountAnalyticAccount(models.Model):
     subvention = fields.Boolean(
         string="Subvention",
         default=_get_default_subvention,
-    )
-    complete_name = fields.Char(
-        string='Complete Name',
-        compute='_compute_complete_name',
-        store=True,
     )
     currency_id = fields.Many2one(
         comodel_name='res.currency',
@@ -56,12 +50,6 @@ class AccountAnalyticAccount(models.Model):
          string='Account Analytic Line',
          track_visibility="always",
     )
-    account_analytic_account_ids = fields.One2many(
-         comodel_name="account.analytic.account",
-         inverse_name="group_id",
-         string='Subvention items',
-         track_visibility="always",
-    )
 
     def _compute_total_expense(self):
         for record in self:
@@ -73,24 +61,6 @@ class AccountAnalyticAccount(models.Model):
                 record.percentage_expense = abs(record.total_expense) / record.total_subvention * 100
             else:
                 record.percentage_expense = 0
-
-    @api.model
-    def name_search(self, name, args=None, operator="ilike", limit=100):
-        args = args or []
-        domain = []
-        if name:
-            domain = ["|", ("complete_name", operator, name), ("name", operator, name)]
-        accounts = self.search(domain + args, limit=limit)
-        return accounts.name_get()
-
-    @api.depends('name')
-    def name_get(self):
-        res = []
-        for account in self:
-            if account.group_id:
-                name = '%s / %s' % (account.group_id.name, account.name)
-                res.append((account.id, name))
-        return res
 
     def action_show_expenses(self):
         '''
