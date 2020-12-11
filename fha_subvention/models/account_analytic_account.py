@@ -80,8 +80,8 @@ class AccountAnalyticAccount(models.Model):
         domain = []
         if name:
             domain = ["|", ("complete_name", operator, name), ("name", operator, name)]
-        invoices = self.search(domain + args, limit=limit)
-        return invoices.name_get()
+        accounts = self.search(domain + args, limit=limit)
+        return accounts.name_get()
 
     @api.depends('name')
     def name_get(self):

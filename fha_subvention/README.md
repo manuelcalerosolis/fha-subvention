@@ -1,6 +1,6 @@
 # FHA Subvention
 
-This is a readme of FHA Subvention project.
+This is a readme of FHA Subvention project, based on analytic accounts.
 
 ## Odoo version
 
