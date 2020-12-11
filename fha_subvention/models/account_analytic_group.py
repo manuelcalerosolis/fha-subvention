@@ -95,4 +95,3 @@ class AccountAnalyticGroup(models.Model):
     def on_change_percentage(self):
         self.annual_subvention = self.total_subvention * self.percentage / 100
         self.annual_spend = self.total_subvention * self.percentage / 100
-
