@@ -74,6 +74,13 @@ class AccountAnalyticAccount(models.Model):
             else:
                 record.percentage_expense = 0
 
+    def _compute_complete_name(self):
+        for record in self:
+            if record.group_id:
+                record.complete_name = '%s / %s' % (record.group_id.name, record.name)
+            else:
+                record.complete_name = record.name
+
     @api.model
     def name_search(self, name, args=None, operator="ilike", limit=100):
         args = args or []
@@ -86,10 +93,10 @@ class AccountAnalyticAccount(models.Model):
     @api.depends('name')
     def name_get(self):
         res = []
-        for account in self:
-            if account.group_id:
-                name = '%s / %s' % (account.group_id.name, account.name)
-                res.append((account.id, name))
+        for record in self:
+            if record.group_id:
+                name = '%s / %s' % (record.group_id.name, record.name)
+                res.append((record.id, name))
         return res
 
     def action_show_expenses(self):
