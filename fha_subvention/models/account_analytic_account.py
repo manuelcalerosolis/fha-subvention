@@ -2,11 +2,14 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from odoo import api, fields, models, _
+from odoo.exceptions import UserError, ValidationError
 
 
 class AccountAnalyticAccount(models.Model):
     _inherit = 'account.analytic.account'
+    _parent_name = 'parent_id'
     _rec_name = 'complete_name'
+    _order = 'complete_name'
 
     def _get_default_subvention(self):
         return self._context.get('in_subvention_app', False)
@@ -62,10 +65,23 @@ class AccountAnalyticAccount(models.Model):
          string='Subvention items',
          track_visibility="always",
     )
+    parent_id = fields.Many2one(
+        comodel_name="account.analytic.group",
+        string='Parent Department',
+        index=True,
+    )
 
     def _compute_total_expense(self):
         for record in self:
             record.total_expense = sum(record.account_analytic_line_ids.mapped('amount'))
+
+    @api.constrains('percentage')
+    def _check_percentage(self):
+        for record in self:
+            if record.percentage <= 0:
+                raise ValidationError(_("The percentage of the %s, must be positive.") % record.name)
+            if record.percentage > 100:
+                raise ValidationError(_("The percentage of the %s, must be not over 100") % record.name)
 
     def _compute_percentage_expense(self):
         for record in self:
@@ -74,6 +90,7 @@ class AccountAnalyticAccount(models.Model):
             else:
                 record.percentage_expense = 0
 
+    @api.depends('name', 'parent_id.complete_name')
     def _compute_complete_name(self):
         for record in self:
             if record.group_id:
@@ -94,9 +111,7 @@ class AccountAnalyticAccount(models.Model):
     def name_get(self):
         res = []
         for record in self:
-            if record.group_id:
-                name = '%s / %s' % (record.group_id.name, record.name)
-                res.append((record.id, name))
+            res.append((record.id, record.complete_name))
         return res
 
     def action_show_expenses(self):

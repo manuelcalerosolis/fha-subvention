@@ -3,7 +3,8 @@
 
 from datetime import date
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
+
 
 
 class AccountAnalyticGroup(models.Model):
@@ -90,6 +91,14 @@ class AccountAnalyticGroup(models.Model):
         if not self.env.user.has_group('fha_subvention.group_fha_administrator_subvention'):
             raise UserError(_("You have not permission to create Subventions"))
         return res
+
+    @api.constrains('percentage')
+    def _check_percentage(self):
+        for record in self:
+            if record.percentage <= 0:
+                raise ValidationError(_("The percentage of the subvention must be positive."))
+            if record.percentage > 100:
+                raise ValidationError(_("The percentage of the subvention must be not over 100"))
 
     @api.onchange('percentage')
     def on_change_percentage(self):

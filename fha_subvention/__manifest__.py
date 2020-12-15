@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Subvention',
+    'name': 'Subventions',
     "version": "13.0.1.0.0",
     'category': 'Tools',
     'summary': 'Centralize your subventions',

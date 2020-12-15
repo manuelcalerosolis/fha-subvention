@@ -63,7 +63,7 @@
         </field>
     </record>
     <record id="fha_subvention_action" model="ir.actions.act_window">
-        <field name="name">Subvention</field>
+        <field name="name">Subventions</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">account.analytic.group</field>
         <field name="view_mode">tree,form,kanban</field>
@@ -82,11 +82,20 @@
         <field name="context">{'in_subvention_app': True}</field>
         <field name="domain">[('subvention', '=', True)]</field>
     </record>
-    <menuitem name="Subventions" id="fha_subvention_menu" sequence="1"
-              web_icon="fha_subvention,static/description/icon.png" groups="fha_subvention.group_fha_user_subvention"/>
-    <menuitem id="fha_subvention_menu_subvention" name="Subventions" parent="fha_subvention_menu" sequence="2"
+    <menuitem name="Subventions"
+              id="fha_subvention_menu"
+              sequence="1"
+              web_icon="fha_subvention,static/description/icon.png"
               groups="fha_subvention.group_fha_user_subvention"/>
-    <menuitem id="fha_subvention_menu_subvention_subvention" name="Subventions" action="fha_subvention_action"
-              parent="fha_subvention_menu_subvention" sequence="2"
+    <menuitem id="fha_subvention_menu_subvention"
+              name="Subventions"
+              parent="fha_subvention_menu"
+              sequence="2"
+              groups="fha_subvention.group_fha_user_subvention"/>
+    <menuitem id="fha_subvention_menu_subvention_subvention"
+              name="Subventions"
+              action="fha_subvention_action"
+              parent="fha_subvention_menu_subvention"
+              sequence="2"
               groups="fha_subvention.group_fha_administrator_subvention"/>
 </odoo>
