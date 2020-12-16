@@ -17,4 +17,5 @@
         'data/fha_subvention_data.xml',
     ],
     'application': True,
+    "uninstall_hook": "uninstall_hook",
 }

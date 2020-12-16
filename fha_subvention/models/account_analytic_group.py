@@ -96,11 +96,17 @@ class AccountAnalyticGroup(models.Model):
     def _check_percentage(self):
         for record in self:
             if record.percentage <= 0:
-                raise ValidationError(_("The percentage of the subvention must be positive."))
+                raise ValidationError(_("The percentage of the subvention must be greater than zero."))
             if record.percentage > 100:
-                raise ValidationError(_("The percentage of the subvention must be not over 100"))
+                raise ValidationError(_("The percentage of the subvention must be not over 100."))
 
-    @api.onchange('percentage')
+    @api.depends('name')
+    def _compute_complete_name(self):
+        for record in self:
+            for line in record.account_analytic_account_ids:
+                line._compute_complete_name()
+
+    @api.onchange('percentage','total_subvention')
     def on_change_percentage(self):
         self.annual_subvention = self.total_subvention * self.percentage / 100
         self.annual_spend = self.total_subvention * self.percentage / 100

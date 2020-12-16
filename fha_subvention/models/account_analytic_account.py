@@ -7,7 +7,7 @@ from odoo.exceptions import UserError, ValidationError
 
 class AccountAnalyticAccount(models.Model):
     _inherit = 'account.analytic.account'
-    _parent_name = 'parent_id'
+    _parent_name = 'group_id'
     _rec_name = 'complete_name'
     _order = 'complete_name'
 
@@ -65,11 +65,6 @@ class AccountAnalyticAccount(models.Model):
          string='Subvention items',
          track_visibility="always",
     )
-    parent_id = fields.Many2one(
-        comodel_name="account.analytic.group",
-        string='Parent Department',
-        index=True,
-    )
 
     def _compute_total_expense(self):
         for record in self:
@@ -79,10 +74,11 @@ class AccountAnalyticAccount(models.Model):
     def _check_percentage(self):
         for record in self:
             if record.percentage <= 0:
-                raise ValidationError(_("The percentage of the %s, must be positive.") % record.name)
+                raise ValidationError(_("The percentage of the %s, must be greater than zero.") % record.name)
             if record.percentage > 100:
-                raise ValidationError(_("The percentage of the %s, must be not over 100") % record.name)
+                raise ValidationError(_("The percentage of the %s, must be not over 100.") % record.name)
 
+    @api.onchange('total_subvention')
     def _compute_percentage_expense(self):
         for record in self:
             if record.total_subvention != 0:
@@ -90,7 +86,7 @@ class AccountAnalyticAccount(models.Model):
             else:
                 record.percentage_expense = 0
 
-    @api.depends('name', 'parent_id.complete_name')
+    @api.depends('name')
     def _compute_complete_name(self):
         for record in self:
             if record.group_id:
