@@ -21,11 +21,11 @@ def uninstall_hook(cr, registry):
     except:
         pass
 
-    # groups = env['account.analytic.group'].search([('subvention', '=', True)])
-    #
-    # try:
-    #     groups.unlink()
-    # except:
-    #     pass
-    #
-    # _logger.warning("The following subventions have been deleted following 'subventions' module uninstallation: %s" % groups.ids)
+    groups = env['account.analytic.group'].search([('subvention', '=', True)])
+
+    try:
+        groups.unlink()
+    except:
+        pass
+
+    _logger.warning("The following subventions have been deleted following 'subventions' module uninstallation: %s" % groups.ids)

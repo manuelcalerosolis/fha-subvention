@@ -7,13 +7,19 @@
     'description': """
     This module offers the possibility of managing your subventions
 """,
-    'depends': ['base','mail','account'],
+    'depends': [
+        'base',
+        'mail',
+        'account',
+        'hr_timesheet',
+    ],
     'data': [
         'security/fha_subvention_security.xml',
         'security/ir.model.access.csv',
         'views/account_analityc_account_view.xml',
         'views/account_analityc_group_view.xml',
         'views/fha_subvention_view.xml',
+        'views/project_task_view.xml',
         'data/fha_subvention_data.xml',
     ],
     'application': True,

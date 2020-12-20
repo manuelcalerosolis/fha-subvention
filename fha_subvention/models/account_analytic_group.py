@@ -6,7 +6,6 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 
 
-
 class AccountAnalyticGroup(models.Model):
     _name = 'account.analytic.group'
     _inherit = ['account.analytic.group', 'mail.thread', 'mail.activity.mixin']
@@ -95,8 +94,8 @@ class AccountAnalyticGroup(models.Model):
     @api.constrains('percentage')
     def _check_percentage(self):
         for record in self:
-            if record.percentage <= 0:
-                raise ValidationError(_("The percentage of the subvention must be greater than zero."))
+            if record.percentage < 1:
+                raise ValidationError(_("The percentage of the subvention must be greater than one."))
             if record.percentage > 100:
                 raise ValidationError(_("The percentage of the subvention must be not over 100."))
 

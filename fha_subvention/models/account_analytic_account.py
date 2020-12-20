@@ -40,7 +40,7 @@ class AccountAnalyticAccount(models.Model):
         required=True,
         digits=(16, 2),
         track_visibility='always',
-        default=0.0,
+        default=1.0,
     )
     total_expense = fields.Monetary(
         string='Total expense',
@@ -73,8 +73,8 @@ class AccountAnalyticAccount(models.Model):
     @api.constrains('percentage')
     def _check_percentage(self):
         for record in self:
-            if record.percentage <= 0:
-                raise ValidationError(_("The percentage of the %s, must be greater than zero.") % record.name)
+            if record.percentage < 1:
+                raise ValidationError(_("The percentage of the %s, must be greater than one.") % record.name)
             if record.percentage > 100:
                 raise ValidationError(_("The percentage of the %s, must be not over 100.") % record.name)
 
