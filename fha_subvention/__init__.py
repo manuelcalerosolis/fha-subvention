@@ -11,19 +11,19 @@ _logger = logging.getLogger(__name__)
 def uninstall_hook(cr, registry):
     env = api.Environment(cr, SUPERUSER_ID, {})
 
-    accounts = env['account.analytic.account'].search([('subvention', '=', True)])
-    accounts.write({'active': False})
-
-    _logger.warning("The following subventions items have been archived following 'subventions' module uninstallation: %s" % accounts.ids)
-
     try:
+        accounts = env['account.analytic.account'].search([('subvention', '=', True)])
+        accounts.write({'active': False})
+
+        _logger.warning("The following subventions items have been archived following 'subventions' module uninstallation: %s" % accounts.ids)
+
         accounts.unlink()
     except:
         pass
 
-    groups = env['account.analytic.group'].search([('subvention', '=', True)])
-
     try:
+        groups = env['account.analytic.group'].search([('subvention', '=', True)])
+
         groups.unlink()
     except:
         pass
