@@ -19,7 +19,6 @@
         'views/account_analityc_account_view.xml',
         'views/account_analityc_group_view.xml',
         'views/fha_subvention_view.xml',
-        'views/project_task_view.xml',
         'data/fha_subvention_data.xml',
     ],
     'application': True,
