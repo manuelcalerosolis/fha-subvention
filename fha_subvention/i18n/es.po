@@ -320,7 +320,7 @@ msgstr "Usuario"
 #, python-format
 msgid ""
 "You cannot validate a bill the line '%s' exceeds the limit of the item."
-msgstr ""
+msgstr "No puede validar la línea de una factura '%s' que excede el límite de la partida subvencionable"
 
 #. module: fha_subvention
 #: code:addons/fha_subvention/models/account_analytic_group.py:0

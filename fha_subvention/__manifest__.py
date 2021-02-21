@@ -10,6 +10,8 @@
     'depends': [
         'base',
         'mail',
+        'sale_management',
+        'purchase',
         'account',
         'hr_timesheet',
     ],
