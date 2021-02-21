@@ -6,6 +6,11 @@
         <field name="model">account.analytic.group</field>
         <field name="inherit_id" ref="analytic.account_analytic_group_form_view"/>
         <field name="arch" type="xml">
+
+            <xpath expr="//form/sheet/group[1]/field[@name='parent_id']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
             <xpath expr="//form/sheet/group[2]" position="after">
                 <field name="subvention" invisible="1"/>
                 <field name="is_readonly" invisible="1"/>
@@ -34,15 +39,20 @@
                                string="Percentage %"
                                attrs="{'readonly':[('is_readonly','=', True)]}"/>
                         <field name="annual_subvention"
+                               string="Subsidized"
                                class="oe_inline"
                                widget="monetary"
                                options="{'currency_field': 'currency_id', 'field_digits': True}"
                                attrs="{'readonly':[('is_readonly','=', True)]}"/>
-                        <field name="annual_spend"
+<!--                        <field name="annual_spend"-->
+<!--                               class="oe_inline"-->
+<!--                               widget="monetary"-->
+<!--                               options="{'currency_field': 'currency_id', 'field_digits': True}"-->
+<!--                               attrs="{'readonly':[('is_readonly','=', True)]}"/>-->
+                        <field name="justified_subvention"
                                class="oe_inline"
                                widget="monetary"
-                               options="{'currency_field': 'currency_id', 'field_digits': True}"
-                               attrs="{'readonly':[('is_readonly','=', True)]}"/>
+                               options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                     </group>
                 </group>
                 <notebook position="inside">
@@ -50,7 +60,7 @@
                         <field name="account_analytic_account_ids">
                             <tree editable="bottom">
                                 <field name="currency_id" invisible="1" />
-                                <field name="name" />
+                                <field name="name" string="Expense Type"/>
                                 <field name="code" />
                                 <field name="percentage" string="Percentage %" />
                                 <field name="total_subvention" sum="Total" widget="monetary" />

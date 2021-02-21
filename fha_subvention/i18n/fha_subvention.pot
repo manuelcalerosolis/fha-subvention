@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-16 09:36+0000\n"
-"PO-Revision-Date: 2020-12-16 09:36+0000\n"
+"POT-Creation-Date: 2021-02-21 12:18+0000\n"
+"PO-Revision-Date: 2021-02-21 12:18+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -33,21 +33,16 @@ msgstr ""
 #: model:ir.model,name:fha_subvention.model_account_analytic_account
 #: model_terms:ir.ui.view,arch_db:fha_subvention.fha_subvention_account_analytic_account_view_filter
 msgid "Analytic Account"
-msgstr "Cuenta analítica"
+msgstr ""
 
 #. module: fha_subvention
 #: model:ir.model,name:fha_subvention.model_account_analytic_group
 msgid "Analytic Categories"
-msgstr "Categorías Analíticas"
+msgstr ""
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__annual_spend
 msgid "Annual Spend"
-msgstr ""
-
-#. module: fha_subvention
-#: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__annual_subvention
-msgid "Annual Subvention"
 msgstr ""
 
 #. module: fha_subvention
@@ -80,7 +75,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__currency_id
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__currency_id
 msgid "Currency"
-msgstr "Moneda"
+msgstr ""
 
 #. module: fha_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.fha_subvention_view_filter
@@ -106,6 +101,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__partner_id
 #: model_terms:ir.ui.view,arch_db:fha_subvention.fha_subvention_view_filter
 msgid "Entity"
+msgstr ""
+
+#. module: fha_subvention
+#: model_terms:ir.ui.view,arch_db:fha_subvention.account_analytic_group_form_view
+msgid "Expense Type"
 msgstr ""
 
 #. module: fha_subvention
@@ -144,6 +144,16 @@ msgid "Items"
 msgstr ""
 
 #. module: fha_subvention
+#: model:ir.model,name:fha_subvention.model_account_move
+msgid "Journal Entries"
+msgstr ""
+
+#. module: fha_subvention
+#: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__justified_subvention
+msgid "Justified Subvention"
+msgstr ""
+
+#. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__percentage
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__percentage
 msgid "Percentage"
@@ -177,6 +187,12 @@ msgid "Search Subvention"
 msgstr ""
 
 #. module: fha_subvention
+#: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__annual_subvention
+#: model_terms:ir.ui.view,arch_db:fha_subvention.account_analytic_group_form_view
+msgid "Subsidized"
+msgstr ""
+
+#. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__subvention
 msgid "Subvention"
@@ -190,7 +206,7 @@ msgstr ""
 #. module: fha_subvention
 #: model:ir.actions.act_window,name:fha_subvention.fha_subvention_expense_action
 msgid "Subvention Expense"
-msgstr "Gastos de Subvención"
+msgstr ""
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__account_analytic_account_ids
@@ -206,7 +222,7 @@ msgstr ""
 #: model:ir.ui.menu,name:fha_subvention.fha_subvention_menu_subvention_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.fha_subvention_view_tree
 msgid "Subventions"
-msgstr "Subvenciones"
+msgstr ""
 
 #. module: fha_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.fha_subvention_account_analytic_account_view_tree
@@ -224,6 +240,11 @@ msgid "The annual subvention."
 msgstr ""
 
 #. module: fha_subvention
+#: model:ir.model.fields,help:fha_subvention.field_account_analytic_group__justified_subvention
+msgid "The justified subvention."
+msgstr ""
+
+#. module: fha_subvention
 #: model:ir.model.fields,help:fha_subvention.field_account_analytic_account__percentage
 msgid "The percentage of subvention concept."
 msgstr ""
@@ -236,7 +257,7 @@ msgstr ""
 #. module: fha_subvention
 #: code:addons/fha_subvention/models/account_analytic_account.py:0
 #, python-format
-msgid "The percentage of the %s, must be greater than zero."
+msgid "The percentage of the %s, must be greater than one."
 msgstr ""
 
 #. module: fha_subvention
@@ -248,7 +269,7 @@ msgstr ""
 #. module: fha_subvention
 #: code:addons/fha_subvention/models/account_analytic_group.py:0
 #, python-format
-msgid "The percentage of the subvention must be greater than zero."
+msgid "The percentage of the subvention must be greater than one."
 msgstr ""
 
 #. module: fha_subvention
@@ -292,6 +313,13 @@ msgstr ""
 #. module: fha_subvention
 #: model:res.groups,name:fha_subvention.group_fha_user_subvention
 msgid "User"
+msgstr ""
+
+#. module: fha_subvention
+#: code:addons/fha_subvention/models/account_move.py:0
+#, python-format
+msgid ""
+"You cannot validate a bill the line '%s' exceeds the limit of the item."
 msgstr ""
 
 #. module: fha_subvention

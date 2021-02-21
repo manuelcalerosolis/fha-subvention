@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-16 09:36+0000\n"
-"PO-Revision-Date: 2020-12-16 09:36+0000\n"
+"POT-Creation-Date: 2021-02-21 12:15+0000\n"
+"PO-Revision-Date: 2021-02-21 12:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -44,11 +44,6 @@ msgstr "Categorías Analíticas"
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__annual_spend
 msgid "Annual Spend"
 msgstr "Gasto Anual"
-
-#. module: fha_subvention
-#: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__annual_subvention
-msgid "Annual Subvention"
-msgstr "Subvencion Anual"
 
 #. module: fha_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.fha_subvention_account_analytic_account_view_filter
@@ -109,6 +104,11 @@ msgid "Entity"
 msgstr "Entidad"
 
 #. module: fha_subvention
+#: model_terms:ir.ui.view,arch_db:fha_subvention.account_analytic_group_form_view
+msgid "Expense Type"
+msgstr "Tipo Gasto"
+
+#. module: fha_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.view_account_analytic_line
 msgid "Expenses"
 msgstr "Gastos"
@@ -144,17 +144,27 @@ msgid "Items"
 msgstr "Partidas"
 
 #. module: fha_subvention
+#: model:ir.model,name:fha_subvention.model_account_move
+msgid "Journal Entries"
+msgstr "Asientos contables"
+
+#. module: fha_subvention
+#: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__justified_subvention
+msgid "Justified Subvention"
+msgstr "Justificado"
+
+#. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__percentage
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__percentage
 msgid "Percentage"
-msgstr "Porcentajes"
+msgstr "Porcentaje"
 
 #. module: fha_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.account_analytic_group_form_view
 #: model_terms:ir.ui.view,arch_db:fha_subvention.view_account_analytic_account_form
 #: model_terms:ir.ui.view,arch_db:fha_subvention.view_account_analytic_line
 msgid "Percentage %"
-msgstr "Porcentaje"
+msgstr "Porcentaje %"
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__percentage_expense
@@ -177,15 +187,21 @@ msgid "Search Subvention"
 msgstr "Buscar Subvenciones"
 
 #. module: fha_subvention
+#: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__annual_subvention
+#: model_terms:ir.ui.view,arch_db:fha_subvention.account_analytic_group_form_view
+msgid "Subsidized"
+msgstr "Justificado"
+
+#. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__subvention
 msgid "Subvention"
-msgstr "Subvencion"
+msgstr "Subvención"
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__code
 msgid "Subvention Code"
-msgstr "Código Subvencion"
+msgstr "Código Subvención"
 
 #. module: fha_subvention
 #: model:ir.actions.act_window,name:fha_subvention.fha_subvention_expense_action
@@ -196,7 +212,7 @@ msgstr "Gastos de Subvención"
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__account_analytic_account_ids
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__account_analytic_account_ids
 msgid "Subvention items"
-msgstr "Partidas de subvencion"
+msgstr "Partidas de Subvención"
 
 #. module: fha_subvention
 #: model:ir.actions.act_window,name:fha_subvention.fha_subvention_action
@@ -221,7 +237,12 @@ msgstr "Gasto Anual"
 #. module: fha_subvention
 #: model:ir.model.fields,help:fha_subvention.field_account_analytic_group__annual_subvention
 msgid "The annual subvention."
-msgstr "La subvencion anual"
+msgstr "La subvención anual"
+
+#. module: fha_subvention
+#: model:ir.model.fields,help:fha_subvention.field_account_analytic_group__justified_subvention
+msgid "The justified subvention."
+msgstr "La subvención justifiacada"
 
 #. module: fha_subvention
 #: model:ir.model.fields,help:fha_subvention.field_account_analytic_account__percentage
@@ -237,7 +258,7 @@ msgstr "El porcentaje de subvención"
 #: code:addons/fha_subvention/models/account_analytic_account.py:0
 #, python-format
 msgid "The percentage of the %s, must be greater than one."
-msgstr "El porcentaje de %s, debe ser mayor que uno."
+msgstr "El porcentage de %s, debe de ser mayor de 1."
 
 #. module: fha_subvention
 #: code:addons/fha_subvention/models/account_analytic_account.py:0
@@ -249,7 +270,7 @@ msgstr "El porcentaje de %s, no debe ser mayor que 100."
 #: code:addons/fha_subvention/models/account_analytic_group.py:0
 #, python-format
 msgid "The percentage of the subvention must be greater than one."
-msgstr "El porcentaje de subvención, debe ser mayor que uno."
+msgstr "El porcentage de la subvención debe de ser mayor de 1."
 
 #. module: fha_subvention
 #: code:addons/fha_subvention/models/account_analytic_group.py:0
@@ -295,6 +316,13 @@ msgid "User"
 msgstr "Usuario"
 
 #. module: fha_subvention
+#: code:addons/fha_subvention/models/account_move.py:0
+#, python-format
+msgid ""
+"You cannot validate a bill the line '%s' exceeds the limit of the item."
+msgstr ""
+
+#. module: fha_subvention
 #: code:addons/fha_subvention/models/account_analytic_group.py:0
 #, python-format
 msgid "You have not permission to create Subventions"
@@ -309,13 +337,3 @@ msgstr "El usuario tiene acceso a crear, modificar y borrar subvenciones"
 #: model:res.groups,comment:fha_subvention.group_fha_user_subvention
 msgid "the user will have access to subventions."
 msgstr "El usuario tiene acceso a las subvenciones"
-
-#. module: fha_subvention
-#: code:addons/fha_subvention/models/account_move.py:0
-#, python-format
-msgid ""
-"You cannot validate a bill the line '%s' exceeds the limit of the item."
-msgstr ""
-"No puede validar una factura, la línea '%s' excede el límite de la partida de la subvención."
-
-

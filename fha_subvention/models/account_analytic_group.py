@@ -64,6 +64,7 @@ class AccountAnalyticGroup(models.Model):
         track_visibility="always",
     )
     annual_subvention = fields.Monetary(
+        string="Subsidized",
         help="The annual subvention.",
         currency_field='currency_id',
         track_visibility="always",
@@ -79,10 +80,21 @@ class AccountAnalyticGroup(models.Model):
          string='Subvention items',
          track_visibility="always",
     )
+    justified_subvention = fields.Monetary(
+        string="Justified Subvention",
+        help="The justified subvention.",
+        currency_field='currency_id',
+        compute='_compute_justified_subvention',
+    )
 
     def _compute_readonly_subvention(self):
         for record in self:
             record.is_readonly = not self.env.user.has_group('fha_subvention.group_fha_administrator_subvention')
+
+    @api.depends('account_analytic_account_ids')
+    def _compute_justified_subvention(self):
+        for record in self:
+            record.justified_subvention = sum(record.account_analytic_account_ids.mapped('total_subvention'))
 
     @api.model
     def default_get(self, fields):
@@ -105,7 +117,7 @@ class AccountAnalyticGroup(models.Model):
             for line in record.account_analytic_account_ids:
                 line._compute_complete_name()
 
-    @api.onchange('percentage','total_subvention')
+    @api.onchange('percentage', 'total_subvention')
     def on_change_percentage(self):
         self.annual_subvention = self.total_subvention * self.percentage / 100
         self.annual_spend = self.total_subvention * self.percentage / 100
