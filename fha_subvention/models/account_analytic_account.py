@@ -56,7 +56,7 @@ class AccountAnalyticAccount(models.Model):
     account_analytic_line_ids = fields.One2many(
          comodel_name="account.analytic.line",
          inverse_name="account_id",
-         string='Account Analytic Line',
+         string='Account analytic line',
          track_visibility="always",
     )
     account_analytic_account_ids = fields.One2many(

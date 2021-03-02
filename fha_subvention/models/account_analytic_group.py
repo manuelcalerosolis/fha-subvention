@@ -11,7 +11,7 @@ class AccountAnalyticGroup(models.Model):
     _inherit = ['account.analytic.group', 'mail.thread', 'mail.activity.mixin']
 
     is_readonly = fields.Boolean(
-        string="Read Only",
+        string='Read Only',
         compute='_compute_readonly_subvention',
     )
 
@@ -19,33 +19,33 @@ class AccountAnalyticGroup(models.Model):
         return self._context.get('in_subvention_app', False)
 
     subvention = fields.Boolean(
-        string="Subvention",
+        string='Subvention',
         default=_get_default_subvention,
     )
     code = fields.Char(
-        string="Subvention Code",
-        help="Code of subvention.",
+        string='Subvention Code',
+        help='Code of subvention.',
         required=True,
         index=True,
-        track_visibility="always",
+        track_visibility='always',
         default=lambda self: self.env['ir.sequence'].next_by_code('fha.subvention'),
     )
     date_init = fields.Date(
-        string="Init Date",
+        string='Init Date',
         required=True,
-        track_visibility="always",
+        track_visibility='always',
         default=lambda d: date(date.today().year, 1, 1),
     )
     date_end = fields.Date(
-        string="End Date",
+        string='End Date',
         required=True,
-        track_visibility="always",
+        track_visibility='always',
         default=lambda d: date(date.today().year, 12, 31),
     )
     partner_id = fields.Many2one(
         'res.partner',
         string='Entity',
-        track_visibility="always",
+        track_visibility='always',
     )
     currency_id = fields.Many2one(
         comodel_name='res.currency',
@@ -54,35 +54,35 @@ class AccountAnalyticGroup(models.Model):
         required=True
     )
     total_subvention = fields.Monetary(
-        help="The total subvention.",
+        help='The total subvention.',
         currency_field='currency_id',
-        track_visibility="always",
+        track_visibility='always',
     )
     percentage = fields.Float(
-        help="The percentage of subvention.",
+        help='The percentage of subvention.',
         digits=(16, 2),
-        track_visibility="always",
+        track_visibility='always',
     )
     annual_subvention = fields.Monetary(
-        string="Subsidized",
-        help="The annual subvention.",
+        string='Subsidized',
+        help='The annual subvention.',
         currency_field='currency_id',
-        track_visibility="always",
+        track_visibility='always',
     )
     annual_spend = fields.Monetary(
-        help="The annual spend.",
+        help='The annual spend.',
         currency_field='currency_id',
-        track_visibility="always",
+        track_visibility='always',
     )
     account_analytic_account_ids = fields.One2many(
-         comodel_name="account.analytic.account",
-         inverse_name="group_id",
+         comodel_name='account.analytic.account',
+         inverse_name='group_id',
          string='Subvention items',
-         track_visibility="always",
+         track_visibility='always',
     )
     justified_subvention = fields.Monetary(
-        string="Justified Subvention",
-        help="The justified subvention.",
+        string='Justified Subvention',
+        help='The justified subvention.',
         currency_field='currency_id',
         compute='_compute_justified_subvention',
     )
@@ -100,16 +100,16 @@ class AccountAnalyticGroup(models.Model):
     def default_get(self, fields):
         res = super().default_get(fields)
         if not self.env.user.has_group('fha_subvention.group_fha_administrator_subvention'):
-            raise UserError(_("You have not permission to create Subventions"))
+            raise UserError(_('You have not permission to create Subventions'))
         return res
 
     @api.constrains('percentage')
     def _check_percentage(self):
         for record in self:
             if record.percentage < 1:
-                raise ValidationError(_("The percentage of the subvention must be greater than one."))
+                raise ValidationError(_('The percentage of the subvention must be greater than one.'))
             if record.percentage > 100:
-                raise ValidationError(_("The percentage of the subvention must be not over 100."))
+                raise ValidationError(_('The percentage of the subvention must be not over 100.'))
 
     @api.depends('name')
     def _compute_complete_name(self):
