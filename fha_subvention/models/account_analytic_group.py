@@ -9,6 +9,7 @@ from odoo.exceptions import UserError, ValidationError
 class AccountAnalyticGroup(models.Model):
     _name = 'account.analytic.group'
     _inherit = ['account.analytic.group', 'mail.thread', 'mail.activity.mixin']
+    _rec_name = 'name'
 
     is_readonly = fields.Boolean(
         string='Read Only',
@@ -94,7 +95,7 @@ class AccountAnalyticGroup(models.Model):
     @api.depends('account_analytic_account_ids')
     def _compute_justified_subvention(self):
         for record in self:
-            record.justified_subvention = sum(record.account_analytic_account_ids.mapped('total_subvention'))
+            record.justified_subvention = sum(record.account_analytic_account_ids.mapped('total_expense'))
 
     @api.model
     def default_get(self, fields):

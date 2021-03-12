@@ -65,10 +65,18 @@ class AccountAnalyticAccount(models.Model):
          string='Subvention items',
          track_visibility="always",
     )
+    account_move_line_id = fields.One2many(
+        comodel_name='account.move.line',
+        inverse_name="analytic_account_id",
+        string='Account Move Line',
+    )
 
     def _compute_total_expense(self):
         for record in self:
-            record.total_expense = sum(record.account_analytic_line_ids.mapped('amount'))
+            total_expense = 0
+            for line in record.account_analytic_line_ids:
+                total_expense += abs(line.amount)
+            record.total_expense = total_expense
 
     @api.constrains('percentage')
     def _check_percentage(self):
@@ -126,7 +134,5 @@ class AccountAnalyticAccount(models.Model):
             'view_id': view.id,
             'target': 'new',
             'res_id': self.id,
-            'context': dict(
-                self.env.context
-            ),
+            'context': dict(self.env.context),
         }

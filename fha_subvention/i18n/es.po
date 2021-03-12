@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-21 12:15+0000\n"
-"PO-Revision-Date: 2021-02-21 12:15+0000\n"
+"POT-Creation-Date: 2021-03-12 22:34+0000\n"
+"PO-Revision-Date: 2021-03-12 22:34+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,12 +17,21 @@ msgstr ""
 
 #. module: fha_subvention
 #: code:addons/fha_subvention/models/account_analytic_account.py:0
-#: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__account_analytic_line_ids
 #: model_terms:ir.ui.view,arch_db:fha_subvention.account_analytic_group_form_view
 #: model_terms:ir.ui.view,arch_db:fha_subvention.view_account_analytic_line
 #, python-format
 msgid "Account Analytic Line"
 msgstr "Linea de Cuenta Analitica"
+
+#. module: fha_subvention
+#: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__account_move_line_id
+msgid "Account Move Line"
+msgstr "Línea de movimiento"
+
+#. module: fha_subvention
+#: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__account_analytic_line_ids
+msgid "Account analytic line"
+msgstr "Línea analítica"
 
 #. module: fha_subvention
 #: model:res.groups,name:fha_subvention.group_fha_administrator_subvention
@@ -39,6 +48,11 @@ msgstr "Cuenta analítica"
 #: model:ir.model,name:fha_subvention.model_account_analytic_group
 msgid "Analytic Categories"
 msgstr "Categorías Analíticas"
+
+#. module: fha_subvention
+#: model:ir.model,name:fha_subvention.model_account_analytic_line
+msgid "Analytic Line"
+msgstr "Línea Analítica"
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__annual_spend
@@ -131,12 +145,17 @@ msgstr "Grupo Por..."
 #. module: fha_subvention
 #: model:ir.module.category,description:fha_subvention.module_category_subvention
 msgid "Helps you handle your subventions."
-msgstr "Ayuda al manejo de subvenciones"
+msgstr "Ayuda al manejo de subvenciónes"
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__date_init
 msgid "Init Date"
 msgstr "Fecha Inicio"
+
+#. module: fha_subvention
+#: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_line__move_name
+msgid "Invoice"
+msgstr "Factura"
 
 #. module: fha_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.account_analytic_group_form_view
@@ -157,14 +176,14 @@ msgstr "Justificado"
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__percentage
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__percentage
 msgid "Percentage"
-msgstr "Porcentaje"
+msgstr "Porcentajes"
 
 #. module: fha_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.account_analytic_group_form_view
 #: model_terms:ir.ui.view,arch_db:fha_subvention.view_account_analytic_account_form
 #: model_terms:ir.ui.view,arch_db:fha_subvention.view_account_analytic_line
 msgid "Percentage %"
-msgstr "Porcentaje %"
+msgstr "Porcentaje"
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__percentage_expense
@@ -184,7 +203,7 @@ msgstr "Solo Lectura"
 #. module: fha_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.fha_subvention_view_filter
 msgid "Search Subvention"
-msgstr "Buscar Subvenciones"
+msgstr "Buscar Subvenciónes"
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__annual_subvention
@@ -222,12 +241,12 @@ msgstr "Partidas de Subvención"
 #: model:ir.ui.menu,name:fha_subvention.fha_subvention_menu_subvention_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.fha_subvention_view_tree
 msgid "Subventions"
-msgstr "Subvenciones"
+msgstr "Subvenciónes"
 
 #. module: fha_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.fha_subvention_account_analytic_account_view_tree
 msgid "Subventions Expenses"
-msgstr "Gastos Subvenciones"
+msgstr "Gastos Subvenciónes"
 
 #. module: fha_subvention
 #: model:ir.model.fields,help:fha_subvention.field_account_analytic_group__annual_spend
@@ -237,12 +256,17 @@ msgstr "Gasto Anual"
 #. module: fha_subvention
 #: model:ir.model.fields,help:fha_subvention.field_account_analytic_group__annual_subvention
 msgid "The annual subvention."
-msgstr "La subvención anual"
+msgstr "La Subvención anual"
 
 #. module: fha_subvention
 #: model:ir.model.fields,help:fha_subvention.field_account_analytic_group__justified_subvention
 msgid "The justified subvention."
 msgstr "La subvención justifiacada"
+
+#. module: fha_subvention
+#: model:ir.model.fields,help:fha_subvention.field_account_analytic_line__move_name
+msgid "The move of this entry line."
+msgstr "El movimiento de esta línea."
 
 #. module: fha_subvention
 #: model:ir.model.fields,help:fha_subvention.field_account_analytic_account__percentage
@@ -292,13 +316,13 @@ msgstr "El total de subvención"
 #: model_terms:ir.ui.view,arch_db:fha_subvention.account_analytic_group_form_view
 #: model_terms:ir.ui.view,arch_db:fha_subvention.view_account_analytic_line_ids_tree
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__total_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__total_subvention
 msgid "Total Subvention"
-msgstr "Total Subvencion"
+msgstr "Total Subvención"
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__total_expense
@@ -320,20 +344,22 @@ msgstr "Usuario"
 #, python-format
 msgid ""
 "You cannot validate a bill the line '%s' exceeds the limit of the item."
-msgstr "No puede validar la línea de una factura '%s' que excede el límite de la partida subvencionable"
+msgstr ""
+"No puede validar la línea de una factura '%s' que excede el límite de la "
+"partida subvenciónable"
 
 #. module: fha_subvention
 #: code:addons/fha_subvention/models/account_analytic_group.py:0
 #, python-format
 msgid "You have not permission to create Subventions"
-msgstr "No tiene permiso para crear subvenciones"
+msgstr "No tiene permiso para crear Subvenciónes"
 
 #. module: fha_subvention
 #: model:res.groups,comment:fha_subvention.group_fha_administrator_subvention
 msgid "the user will have access to create, update and delete subventions."
-msgstr "El usuario tiene acceso a crear, modificar y borrar subvenciones"
+msgstr "El usuario tiene acceso a crear, modificar y borrar Subvenciónes"
 
 #. module: fha_subvention
 #: model:res.groups,comment:fha_subvention.group_fha_user_subvention
 msgid "the user will have access to subventions."
-msgstr "El usuario tiene acceso a las subvenciones"
+msgstr "El usuario tiene acceso a las Subvenciónes"
