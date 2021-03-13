@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-12 22:34+0000\n"
-"PO-Revision-Date: 2021-03-12 22:34+0000\n"
+"POT-Creation-Date: 2021-03-13 01:23+0000\n"
+"PO-Revision-Date: 2021-03-13 01:23+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -145,7 +145,7 @@ msgstr "Grupo Por..."
 #. module: fha_subvention
 #: model:ir.module.category,description:fha_subvention.module_category_subvention
 msgid "Helps you handle your subventions."
-msgstr "Ayuda al manejo de subvenciónes"
+msgstr "Ayuda al manejo de Subvenciónes"
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__date_init
@@ -194,6 +194,13 @@ msgstr "Porcentaje de gasto"
 #: model:ir.model.fields,help:fha_subvention.field_account_analytic_account__percentage_expense
 msgid "Percentage of expense in this item"
 msgstr "Porcentaje de gasto en esta partida"
+
+#. module: fha_subvention
+#: code:addons/fha_subvention/models/account_analytic_group.py:0
+#: code:addons/fha_subvention/models/account_analytic_group.py:0
+#, python-format
+msgid "Please create a Personal item."
+msgstr "Por favor cree un tipo de gasto 'Personal'"
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__is_readonly
@@ -316,7 +323,7 @@ msgstr "El total de subvención"
 #: model_terms:ir.ui.view,arch_db:fha_subvention.account_analytic_group_form_view
 #: model_terms:ir.ui.view,arch_db:fha_subvention.view_account_analytic_line_ids_tree
 msgid "Total"
-msgstr "Total"
+msgstr ""
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__total_subvention
@@ -346,7 +353,7 @@ msgid ""
 "You cannot validate a bill the line '%s' exceeds the limit of the item."
 msgstr ""
 "No puede validar la línea de una factura '%s' que excede el límite de la "
-"partida subvenciónable"
+"partida Subvenciónable"
 
 #. module: fha_subvention
 #: code:addons/fha_subvention/models/account_analytic_group.py:0
