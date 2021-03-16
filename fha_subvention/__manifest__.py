@@ -21,6 +21,7 @@
         'views/account_analityc_account_view.xml',
         'views/account_analityc_group_view.xml',
         'views/fha_subvention_view.xml',
+        'views/hr_timesheet_views.xml',
         'data/fha_subvention_data.xml',
     ],
     'application': True,

@@ -9,6 +9,10 @@ class AccountAnalyticLine(models.Model):
 
     move_name = fields.Many2one(
         related='move_id.move_id',
-        string="Invoice",
+        string="Invoice Number",
         readonly=True,
     )
+
+    # timesheet_invoice_id = fields.Many2one('account.move', string="Invoice", readonly=True, copy=False, help="Invoice created from the timesheet")
+
+    # account_id = fields.Many2one('account.analytic.account', 'Analytic Account', required=True, ondelete='restrict', index=True, domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
