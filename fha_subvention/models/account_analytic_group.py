@@ -122,36 +122,3 @@ class AccountAnalyticGroup(models.Model):
     def on_change_percentage(self):
         self.annual_subvention = self.total_subvention * self.percentage / 100
         self.annual_spend = self.total_subvention * self.percentage / 100
-
-    @api.model
-    def default_get(self, fields):
-        record = super(AccountAnalyticGroup, self).default_get(fields)
-        record.update(
-            {"account_analytic_account_ids":
-                [(0, 0, {
-                    'percentage': 0,
-                    'total_subvention': 0,
-                    'name': 'Personal',
-                    'code': False})
-                ]
-            }
-        )
-        return record
-
-    @api.model
-    def create(self, vals):
-        record = super(AccountAnalyticGroup, self).create(vals)
-        if not self.mapped('account_analytic_account_ids').filtered(
-            lambda l: l.name == 'Personal'
-        ):
-            raise UserError(_('Please create a Personal item.'))
-        return record
-
-    def write(self, vals):
-        print("write ::::")
-        record = super(AccountAnalyticGroup, self).write(vals)
-        if not self.mapped('account_analytic_account_ids').filtered(
-            lambda l: l.name == 'Personal'
-        ):
-            raise UserError(_('Please create a Personal item.'))
-        return record

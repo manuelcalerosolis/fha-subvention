@@ -216,7 +216,7 @@ msgstr "Buscar Subvenciónes"
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__annual_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.account_analytic_group_form_view
 msgid "Subsidized"
-msgstr "Justificado"
+msgstr "Subvencionado"
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__subvention
