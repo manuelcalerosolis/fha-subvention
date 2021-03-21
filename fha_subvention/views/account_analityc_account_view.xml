@@ -73,7 +73,7 @@
                 <field name="date"/>
                 <field name="name"/>
                 <field name="move_name"/>
-                <field name="amount" sum="Total" widget="monetary"/>
+                <field name="abs_amount" sum="Total" widget="monetary"/>
             </tree>
         </field>
     </record>

@@ -12,7 +12,13 @@ class AccountAnalyticLine(models.Model):
         string="Invoice Number",
         readonly=True,
     )
+    abs_amount = fields.Monetary(
+        string="Absolute Amount",
+        compute="_compute_amount",
+        store=True,
+    )
 
-    # timesheet_invoice_id = fields.Many2one('account.move', string="Invoice", readonly=True, copy=False, help="Invoice created from the timesheet")
-
-    # account_id = fields.Many2one('account.analytic.account', 'Analytic Account', required=True, ondelete='restrict', index=True, domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
+    @api.depends("amount")
+    def _compute_amount(self):
+        for record in self:
+            record.abs_amount = abs(record.amount)

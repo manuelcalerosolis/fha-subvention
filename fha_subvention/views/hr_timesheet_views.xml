@@ -3,10 +3,14 @@
 
     <record id="hr_timesheet_line_tree" model="ir.ui.view">
         <field name="model">account.analytic.line</field>
-        <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree" />
+        <field name="inherit_id"
+               ref="hr_timesheet.hr_timesheet_line_tree" />
         <field name="arch" type="xml">
-            <field name="task_id" position="after">
-                <field name="account_id" />
+            <field name="task_id"
+                   position="after">
+                <field name="account_id"
+                       invisible="not context.get('in_subvention_app', False)"
+                />
             </field>
         </field>
     </record>

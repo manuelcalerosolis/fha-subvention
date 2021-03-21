@@ -44,11 +44,6 @@
                                widget="monetary"
                                options="{'currency_field': 'currency_id', 'field_digits': True}"
                                attrs="{'readonly':[('is_readonly','=', True)]}"/>
-<!--                        <field name="annual_spend"-->
-<!--                               class="oe_inline"-->
-<!--                               widget="monetary"-->
-<!--                               options="{'currency_field': 'currency_id', 'field_digits': True}"-->
-<!--                               attrs="{'readonly':[('is_readonly','=', True)]}"/>-->
                         <field name="justified_subvention"
                                class="oe_inline"
                                widget="monetary"

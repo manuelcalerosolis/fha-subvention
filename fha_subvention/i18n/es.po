@@ -6,14 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-13 01:23+0000\n"
-"PO-Revision-Date: 2021-03-13 01:23+0000\n"
+"POT-Creation-Date: 2021-03-21 11:32+0000\n"
+"PO-Revision-Date: 2021-03-21 11:32+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: fha_subvention
+#: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_line__abs_amount
+msgid "Absolute Amount"
+msgstr "Importe"
 
 #. module: fha_subvention
 #: code:addons/fha_subvention/models/account_analytic_account.py:0
@@ -145,7 +150,7 @@ msgstr "Grupo Por..."
 #. module: fha_subvention
 #: model:ir.module.category,description:fha_subvention.module_category_subvention
 msgid "Helps you handle your subventions."
-msgstr "Ayuda al manejo de Subvenciónes"
+msgstr "Ayuda al manejo de subvenciones"
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__date_init
@@ -154,8 +159,8 @@ msgstr "Fecha Inicio"
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_line__move_name
-msgid "Invoice"
-msgstr "Factura"
+msgid "Invoice Number"
+msgstr "Número Factura"
 
 #. module: fha_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.account_analytic_group_form_view
@@ -173,17 +178,22 @@ msgid "Justified Subvention"
 msgstr "Justificado"
 
 #. module: fha_subvention
+#: model:ir.actions.act_window,name:fha_subvention.fha_timesheet_action
+msgid "My Timesheets"
+msgstr "Mi parte de horas"
+
+#. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__percentage
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__percentage
 msgid "Percentage"
-msgstr "Porcentajes"
+msgstr "Porcentaje"
 
 #. module: fha_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.account_analytic_group_form_view
 #: model_terms:ir.ui.view,arch_db:fha_subvention.view_account_analytic_account_form
 #: model_terms:ir.ui.view,arch_db:fha_subvention.view_account_analytic_line
 msgid "Percentage %"
-msgstr "Porcentaje"
+msgstr "Porcentaje %"
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__percentage_expense
@@ -196,21 +206,19 @@ msgid "Percentage of expense in this item"
 msgstr "Porcentaje de gasto en esta partida"
 
 #. module: fha_subvention
-#: code:addons/fha_subvention/models/account_analytic_group.py:0
-#: code:addons/fha_subvention/models/account_analytic_group.py:0
-#, python-format
-msgid "Please create a Personal item."
-msgstr "Por favor cree un tipo de gasto 'Personal'"
-
-#. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__is_readonly
 msgid "Read Only"
 msgstr "Solo Lectura"
 
 #. module: fha_subvention
+#: model_terms:ir.actions.act_window,help:fha_subvention.fha_timesheet_action
+msgid "Record a new activity"
+msgstr "Grabar una nueva actividad"
+
+#. module: fha_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.fha_subvention_view_filter
 msgid "Search Subvention"
-msgstr "Buscar Subvenciónes"
+msgstr "Buscar Subvenciones"
 
 #. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__annual_subvention
@@ -230,11 +238,6 @@ msgid "Subvention Code"
 msgstr "Código Subvención"
 
 #. module: fha_subvention
-#: model:ir.actions.act_window,name:fha_subvention.fha_subvention_expense_action
-msgid "Subvention Expense"
-msgstr "Gastos de Subvención"
-
-#. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__account_analytic_account_ids
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__account_analytic_account_ids
 msgid "Subvention items"
@@ -245,15 +248,14 @@ msgstr "Partidas de Subvención"
 #: model:ir.module.category,name:fha_subvention.module_category_subvention
 #: model:ir.ui.menu,name:fha_subvention.fha_subvention_menu
 #: model:ir.ui.menu,name:fha_subvention.fha_subvention_menu_subvention
-#: model:ir.ui.menu,name:fha_subvention.fha_subvention_menu_subvention_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.fha_subvention_view_tree
 msgid "Subventions"
-msgstr "Subvenciónes"
+msgstr "Subvenciones"
 
 #. module: fha_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.fha_subvention_account_analytic_account_view_tree
 msgid "Subventions Expenses"
-msgstr "Gastos Subvenciónes"
+msgstr "Gastos Subvenciones"
 
 #. module: fha_subvention
 #: model:ir.model.fields,help:fha_subvention.field_account_analytic_group__annual_spend
@@ -263,7 +265,7 @@ msgstr "Gasto Anual"
 #. module: fha_subvention
 #: model:ir.model.fields,help:fha_subvention.field_account_analytic_group__annual_subvention
 msgid "The annual subvention."
-msgstr "La Subvención anual"
+msgstr "La subvencion anual"
 
 #. module: fha_subvention
 #: model:ir.model.fields,help:fha_subvention.field_account_analytic_group__justified_subvention
@@ -320,6 +322,11 @@ msgid "The total subvention."
 msgstr "El total de subvención"
 
 #. module: fha_subvention
+#: model:ir.ui.menu,name:fha_subvention.res_partner_menu_contacts
+msgid "Timesheet"
+msgstr "Parte de horas"
+
+#. module: fha_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.account_analytic_group_form_view
 #: model_terms:ir.ui.view,arch_db:fha_subvention.view_account_analytic_line_ids_tree
 msgid "Total"
@@ -347,26 +354,36 @@ msgid "User"
 msgstr "Usuario"
 
 #. module: fha_subvention
+#: model_terms:ir.actions.act_window,help:fha_subvention.fha_timesheet_action
+msgid ""
+"You can register and track your workings hours by project every\n"
+"                day. Every time spent on a project will become a cost and can be re-invoiced to\n"
+"                customers if required."
+msgstr ""
+"Puede registrar y seguir sus horas de trabajo por cada día del proyecto\n"
+"Cada vez que emplea horas en un proyecto, se creará un coste que puede ser facturado al cliente si es necesario."
+
+#. module: fha_subvention
 #: code:addons/fha_subvention/models/account_move.py:0
 #, python-format
 msgid ""
 "You cannot validate a bill the line '%s' exceeds the limit of the item."
 msgstr ""
 "No puede validar la línea de una factura '%s' que excede el límite de la "
-"partida Subvenciónable"
+"partida subvencionable"
 
 #. module: fha_subvention
 #: code:addons/fha_subvention/models/account_analytic_group.py:0
 #, python-format
 msgid "You have not permission to create Subventions"
-msgstr "No tiene permiso para crear Subvenciónes"
+msgstr "No tiene permiso para crear subvenciones"
 
 #. module: fha_subvention
 #: model:res.groups,comment:fha_subvention.group_fha_administrator_subvention
 msgid "the user will have access to create, update and delete subventions."
-msgstr "El usuario tiene acceso a crear, modificar y borrar Subvenciónes"
+msgstr "El usuario tiene acceso a crear, modificar y borrar subvenciones"
 
 #. module: fha_subvention
 #: model:res.groups,comment:fha_subvention.group_fha_user_subvention
 msgid "the user will have access to subventions."
-msgstr "El usuario tiene acceso a las Subvenciónes"
+msgstr "El usuario tiene acceso a las subvenciones"

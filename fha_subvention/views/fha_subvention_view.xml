@@ -30,6 +30,7 @@
             </tree>
         </field>
     </record>
+
     <record id="fha_subvention_account_analytic_account_view_filter" model="ir.ui.view">
         <field name="name">fha.subvention.account.analytic.account.view.filter</field>
         <field name="model">account.analytic.account</field>
@@ -48,6 +49,7 @@
             </search>
         </field>
     </record>
+
     <record id="fha_subvention_view_filter" model="ir.ui.view">
         <field name="name">fha.subvention.view.filter</field>
         <field name="model">account.analytic.group</field>
@@ -62,7 +64,9 @@
             </search>
         </field>
     </record>
-    <record id="fha_subvention_action" model="ir.actions.act_window">
+
+    <record id="fha_subvention_action"
+            model="ir.actions.act_window">
         <field name="name">Subventions</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">account.analytic.group</field>
@@ -72,30 +76,51 @@
         <field name="context">{'in_subvention_app': True}</field>
         <field name="domain">[('subvention', '=', True)]</field>
     </record>
-    <record id="fha_subvention_expense_action" model="ir.actions.act_window">
-        <field name="name">Subvention Expense</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">account.analytic.account</field>
-        <field name="view_mode">tree,form,kanban</field>
-        <field name="view_id" ref="fha_subvention_account_analytic_account_view_tree"/>
-        <field name="search_view_id" ref="fha_subvention_account_analytic_account_view_filter"/>
-        <field name="context">{'in_subvention_app': True}</field>
-        <field name="domain">[('subvention', '=', True)]</field>
+
+    <record id="fha_timesheet_action"
+            model="ir.actions.act_window">
+        <field name="name">My Timesheets</field>
+        <field name="res_model">account.analytic.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('project_id', '!=', False), ('user_id', '=', uid)]</field>
+        <field name="context">{
+            "search_default_week": 1,
+            "in_subvention_app": True,
+            }
+        </field>
+        <field name="search_view_id"
+               ref="hr_timesheet.hr_timesheet_line_search"/>
+        <field name="help"
+               type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Record a new activity
+            </p>
+            <p>
+                You can register and track your workings hours by project every
+                day. Every time spent on a project will become a cost and can be re-invoiced to
+                customers if required.
+            </p>
+        </field>
     </record>
+
     <menuitem name="Subventions"
               id="fha_subvention_menu"
               sequence="1"
               web_icon="fha_subvention,static/description/icon.png"
               groups="fha_subvention.group_fha_user_subvention"/>
+
     <menuitem id="fha_subvention_menu_subvention"
               name="Subventions"
               parent="fha_subvention_menu"
+              action="fha_subvention_action"
               sequence="2"
               groups="fha_subvention.group_fha_user_subvention"/>
-    <menuitem id="fha_subvention_menu_subvention_subvention"
-              name="Subventions"
-              action="fha_subvention_action"
-              parent="fha_subvention_menu_subvention"
+
+    <menuitem id="res_partner_menu_contacts"
+              name="Timesheet"
+              parent="fha_subvention_menu"
+              action="fha_timesheet_action"
               sequence="2"
-              groups="fha_subvention.group_fha_administrator_subvention"/>
+              groups="fha_subvention.group_fha_user_subvention"/>
+
 </odoo>

@@ -6,14 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 12:22+0000\n"
-"PO-Revision-Date: 2021-03-18 12:22+0000\n"
+"POT-Creation-Date: 2021-03-21 11:31+0000\n"
+"PO-Revision-Date: 2021-03-21 11:31+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: fha_subvention
+#: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_line__abs_amount
+msgid "Absolute Amount"
+msgstr ""
 
 #. module: fha_subvention
 #: code:addons/fha_subvention/models/account_analytic_account.py:0
@@ -173,6 +178,11 @@ msgid "Justified Subvention"
 msgstr ""
 
 #. module: fha_subvention
+#: model:ir.actions.act_window,name:fha_subvention.fha_timesheet_action
+msgid "My Timesheets"
+msgstr ""
+
+#. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__percentage
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__percentage
 msgid "Percentage"
@@ -201,6 +211,11 @@ msgid "Read Only"
 msgstr ""
 
 #. module: fha_subvention
+#: model_terms:ir.actions.act_window,help:fha_subvention.fha_timesheet_action
+msgid "Record a new activity"
+msgstr ""
+
+#. module: fha_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.fha_subvention_view_filter
 msgid "Search Subvention"
 msgstr ""
@@ -223,11 +238,6 @@ msgid "Subvention Code"
 msgstr ""
 
 #. module: fha_subvention
-#: model:ir.actions.act_window,name:fha_subvention.fha_subvention_expense_action
-msgid "Subvention Expense"
-msgstr ""
-
-#. module: fha_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_account__account_analytic_account_ids
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__account_analytic_account_ids
 msgid "Subvention items"
@@ -238,7 +248,6 @@ msgstr ""
 #: model:ir.module.category,name:fha_subvention.module_category_subvention
 #: model:ir.ui.menu,name:fha_subvention.fha_subvention_menu
 #: model:ir.ui.menu,name:fha_subvention.fha_subvention_menu_subvention
-#: model:ir.ui.menu,name:fha_subvention.fha_subvention_menu_subvention_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.fha_subvention_view_tree
 msgid "Subventions"
 msgstr ""
@@ -313,6 +322,11 @@ msgid "The total subvention."
 msgstr ""
 
 #. module: fha_subvention
+#: model:ir.ui.menu,name:fha_subvention.res_partner_menu_contacts
+msgid "Timesheet"
+msgstr ""
+
+#. module: fha_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.account_analytic_group_form_view
 #: model_terms:ir.ui.view,arch_db:fha_subvention.view_account_analytic_line_ids_tree
 msgid "Total"
@@ -337,6 +351,14 @@ msgstr ""
 #. module: fha_subvention
 #: model:res.groups,name:fha_subvention.group_fha_user_subvention
 msgid "User"
+msgstr ""
+
+#. module: fha_subvention
+#: model_terms:ir.actions.act_window,help:fha_subvention.fha_timesheet_action
+msgid ""
+"You can register and track your workings hours by project every\n"
+"                day. Every time spent on a project will become a cost and can be re-invoiced to\n"
+"                customers if required."
 msgstr ""
 
 #. module: fha_subvention
