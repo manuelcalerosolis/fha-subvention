@@ -2,12 +2,10 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from . import models
-from odoo.exceptions import ValidationError
 
 from odoo import api, SUPERUSER_ID
 
 import logging
-
 _logger = logging.getLogger(__name__)
 
 
@@ -20,12 +18,15 @@ def uninstall_hook(cr, registry):
             _logger.warning(
                 "The following subventions items have been archived following 'subventions' module uninstallation: %s" % accounts.ids)
             accounts.unlink()
+    except:
+        pass
 
+    try:
         groups = env['account.analytic.group'].search([('subvention', '=', True)])
         if groups:
             _logger.warning(
                 "The following subventions have been deleted following 'subventions' module uninstallation: %s" % groups.ids)
             groups.unlink()
-    except Exception as e:
-        _logger.exception("Transaction post processing failed")
-        env.cr.rollback()
+    except:
+        pass
+

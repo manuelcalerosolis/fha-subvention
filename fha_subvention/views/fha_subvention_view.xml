@@ -71,8 +71,10 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">account.analytic.group</field>
         <field name="view_mode">tree,form,kanban</field>
-        <field name="view_id" ref="fha_subvention_view_tree"/>
-        <field name="search_view_id" ref="fha_subvention_view_filter"/>
+        <field name="view_id"
+               ref="fha_subvention_view_tree"/>
+        <field name="search_view_id"
+               ref="fha_subvention_view_filter"/>
         <field name="context">{'in_subvention_app': True}</field>
         <field name="domain">[('subvention', '=', True)]</field>
     </record>
