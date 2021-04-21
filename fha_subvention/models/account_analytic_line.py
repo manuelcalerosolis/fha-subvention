@@ -17,6 +17,25 @@ class AccountAnalyticLine(models.Model):
         compute="_compute_amount",
         store=True,
     )
+    subvention = fields.Boolean(
+        string='Subvention',
+        related="group_id.subvention",
+    )
+    account_id = fields.Many2one(
+        'account.analytic.account',
+        'Analytic Account',
+        required=False,
+        ondelete='restrict',
+        index=True,
+        domain="[('subvention', '=', True), '|', ('company_id', '=', False), ('company_id', '=', company_id)]"
+    )
+
+    def _timesheet_preprocess(self, vals):
+        context = dict(self._context or {})
+        result = super(AccountAnalyticLine, self)._timesheet_preprocess(vals)
+        if not context.get('in_subvention_app', False) and result.get('account_id'):
+            result.pop('account_id')
+        return result
 
     @api.depends("amount")
     def _compute_amount(self):
