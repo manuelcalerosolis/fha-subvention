@@ -1,7 +1,7 @@
 # Copyright 2020 Xtendoo Corporation
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from odoo import api, fields, models, _
-from odoo.exceptions import RedirectWarning, UserError, ValidationError, AccessError
+from odoo.exceptions import ValidationError
 
 
 class AccountMove(models.Model):
@@ -18,3 +18,4 @@ class AccountMove(models.Model):
                         ) % line.name
                     )
         return super().action_post()
+

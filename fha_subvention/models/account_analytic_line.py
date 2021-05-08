@@ -32,7 +32,10 @@ class AccountAnalyticLine(models.Model):
 
     def _timesheet_preprocess(self, vals):
         context = dict(self._context or {})
-        result = super(AccountAnalyticLine, self)._timesheet_preprocess(vals)
+        result = super()._timesheet_preprocess(vals)
+
+        print("***context", context)
+
         if not context.get('in_subvention_app', False) and result.get('account_id'):
             result.pop('account_id')
         return result
