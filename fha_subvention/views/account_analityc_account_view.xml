@@ -46,6 +46,7 @@
                         <field name="code" readonly="1"/>
                         <field name="percentage" string="Percentage %" readonly="1"/>
                         <field name="total_subvention" readonly="1"/>
+                        <field name="total_expense" readonly="1"/>
                     </group>
                 </group>
                 <notebook position="inside">
@@ -73,7 +74,7 @@
                 <field name="date"/>
                 <field name="name"/>
                 <field name="move_name"/>
-                <field name="abs_amount" sum="Total" widget="monetary"/>
+                <field name="amount" widget="monetary"/>
             </tree>
         </field>
     </record>
