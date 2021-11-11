@@ -9,17 +9,17 @@ class AccountAnalyticLine(models.Model):
 
     move_name = fields.Many2one(
         related='move_id.move_id',
-        string="Invoice Number",
+        string='Invoice Number',
         readonly=True,
     )
     abs_amount = fields.Monetary(
-        string="Absolute Amount",
-        compute="_compute_amount",
+        string='Absolute Amount',
+        compute='_compute_amount',
         store=True,
     )
     subvention = fields.Boolean(
         string='Subvention',
-        related="group_id.subvention",
+        related='group_id.subvention',
     )
     account_id = fields.Many2one(
         'account.analytic.account',
@@ -29,6 +29,17 @@ class AccountAnalyticLine(models.Model):
         index=True,
         domain="[('subvention', '=', True), '|', ('company_id', '=', False), ('company_id', '=', company_id)]"
     )
+    justified_percentage = fields.Float(
+        related='account_id.percentage',
+        digits=(16, 2),
+        default=0.0,
+    )
+    justified_amount = fields.Monetary(
+        string='Justified Amount',
+        help='The justified amount.',
+        currency_field='currency_id',
+        compute='_compute_justified_amount',
+    )
 
     def _timesheet_preprocess(self, vals):
         context = dict(self._context or {})
@@ -37,7 +48,13 @@ class AccountAnalyticLine(models.Model):
             result.pop('account_id')
         return result
 
-    @api.depends("amount")
+    @api.depends('amount')
     def _compute_amount(self):
         for record in self:
             record.abs_amount = abs(record.amount)
+
+    @api.depends('amount')
+    def _compute_justified_amount(self):
+        self.justified_amount = 0
+        for record in self.filtered(lambda r: r.amount != 0):
+            record.justified_amount = abs(record.amount) * record.justified_percentage / 100

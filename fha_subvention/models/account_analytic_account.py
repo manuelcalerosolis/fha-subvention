@@ -71,12 +71,10 @@ class AccountAnalyticAccount(models.Model):
         string='Account Move Line',
     )
 
+    @api.depends('account_analytic_line_ids')
     def _compute_total_expense(self):
         for record in self:
-            total_expense = 0
-            for line in record.account_analytic_line_ids:
-                total_expense += abs(line.amount)
-            record.total_expense = total_expense
+            record.total_expense = sum(record.account_analytic_line_ids.mapped('justified_amount'))
 
     @api.constrains('percentage')
     def _check_percentage(self):
@@ -88,11 +86,9 @@ class AccountAnalyticAccount(models.Model):
 
     @api.onchange('total_subvention')
     def _compute_percentage_expense(self):
-        for record in self:
-            if record.total_subvention != 0:
-                record.percentage_expense = abs(record.total_expense) / record.total_subvention * 100
-            else:
-                record.percentage_expense = 0
+        self.percentage_expense = 0
+        for record in self.filtered(lambda r: r.total_subvention != 0):
+            record.percentage_expense = abs(record.total_expense) / record.total_subvention * 100
 
     @api.depends('name')
     def _compute_complete_name(self):
