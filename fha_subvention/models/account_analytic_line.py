@@ -27,7 +27,7 @@ class AccountAnalyticLine(models.Model):
         required=False,
         ondelete='restrict',
         index=True,
-        domain="[('subvention', '=', True), '|', ('company_id', '=', False), ('company_id', '=', company_id)]"
+        domain="[('subvention', '=', True), '|', ('company_id', '=', False), ('company_id', '=', company_id)]",
     )
     justified_percentage = fields.Float(
         related='account_id.percentage',
@@ -53,7 +53,7 @@ class AccountAnalyticLine(models.Model):
         for record in self:
             record.abs_amount = abs(record.amount)
 
-    @api.depends('amount')
+    @api.depends('amount', 'justified_percentage')
     def _compute_justified_amount(self):
         self.justified_amount = 0
         for record in self.filtered(lambda r: r.amount != 0):

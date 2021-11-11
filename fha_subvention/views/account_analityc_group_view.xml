@@ -49,6 +49,10 @@
                                widget="monetary"
                                options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                     </group>
+                    <group>
+                        <field name="project_id"
+                               attrs="{'readonly':[('is_readonly','=', True)]}"/>
+                    </group>
                 </group>
                 <notebook position="inside">
                     <page string="Items" name="item">

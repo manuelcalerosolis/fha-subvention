@@ -87,6 +87,14 @@ class AccountAnalyticGroup(models.Model):
         currency_field='currency_id',
         compute='_compute_justified_subvention',
     )
+    project_id = fields.Many2one(
+        'project.project',
+        string='Project',
+        index=True,
+        tracking=True,
+        check_company=True,
+        change_default=True,
+    )
 
     def _compute_readonly_subvention(self):
         for record in self:
@@ -122,3 +130,19 @@ class AccountAnalyticGroup(models.Model):
     def on_change_percentage(self):
         self.annual_subvention = self.total_subvention * self.percentage / 100
         self.annual_spend = self.total_subvention * self.percentage / 100
+
+    def _get_default_project(self):
+        project_id = self.env['project.project'].search([('name', '=', self.name )], limit=1)
+        if project_id:
+            return project_id
+        project_id = self.env['project.project'].sudo().create({
+            'name': self.name,
+            'allow_timesheets': True,
+        })
+        return project_id
+
+    def write(self, vals):
+        if not vals.get('project_id'):
+            vals['project_id'] = self._get_default_project()
+        return super().write(vals)
+
