@@ -71,8 +71,8 @@
             <tree editable="bottom">
                 <field name="currency_id" invisible="1"/>
                 <field name="company_id" invisible="1"/>
-                <field name="date" attrs="{'readonly': True}"/>
-                <field name="name" attrs="{'readonly': True}"/>
+                <field name="date"/>
+                <field name="name"/>
                 <field name="move_name"/>
                 <field name="abs_amount" widget="monetary"/>
                 <field name="justified_percentage"/>
