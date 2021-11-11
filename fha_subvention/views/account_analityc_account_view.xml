@@ -56,6 +56,7 @@
                     </page>
                 </notebook>
                 <footer class="oe_edit_only">
+<!--                    <button name="button_confirm" type="object" string="Confirm" class="oe_highlight"/>-->
                     <button string="Confirm" special="save" class="oe_highlight"/>
                     <button string="Discard" special="cancel"/>
                 </footer>
@@ -74,7 +75,7 @@
                 <field name="date"/>
                 <field name="name"/>
                 <field name="move_name"/>
-                <field name="abs_amount" widget="monetary"/>
+                <field name="amount" widget="monetary"/>
                 <field name="justified_percentage"/>
                 <field name="justified_amount" widget="monetary"/>
             </tree>

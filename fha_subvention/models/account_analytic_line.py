@@ -58,3 +58,12 @@ class AccountAnalyticLine(models.Model):
         self.justified_amount = 0
         for record in self.filtered(lambda r: r.amount != 0):
             record.justified_amount = abs(record.amount) * record.justified_percentage / 100
+
+    @api.model
+    def create(self, vals):
+        print("create account.analytic.line", self.justified_amount)
+        return super().create(vals)
+
+    def write(self, vals):
+        print("write account.analytic.line", self.justified_amount)
+        return super().write(vals)
