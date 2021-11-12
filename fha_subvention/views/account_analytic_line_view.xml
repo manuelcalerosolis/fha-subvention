@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_timesheet_line_subvention_tree" model="ir.ui.view">
+        <field name="name">account.analytic.line.tree.hr_timesheet</field>
+        <field name="model">account.analytic.line</field>
+        <field name="arch" type="xml">
+            <tree editable="top" string="Timesheet Activities">
+                <field name="subvention" invisible="1" />
+                <field name="date"/>
+                <field name="employee_id" invisible="1"/>
+                <field name="name"/>
+                <field name="project_id" invisible="1"/>
+                <field name="task_id" context="{'default_project_id': project_id}" domain="[('project_id', '=', project_id)]"/>
+                <field name="account_id" string="Subvention"/>
+                <field name="unit_amount" widget="timesheet_uom" sum="Total"/>
+                <field name="company_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+<!--    <record id="hr_timesheet_line_subvention_tree" model="ir.ui.view">-->
+<!--        <field name="model">account.analytic.line</field>-->
+<!--        <field name="inherit_id"-->
+<!--               ref="hr_timesheet.hr_timesheet_line_tree" />-->
+<!--        <field name="arch" type="xml">-->
+
+<!--            <field name="task_id" position="after">-->
+<!--                <field name="is_subvention_app" />-->
+<!--                <field name="account_id"-->
+<!--                       invisible="not context.get('in_subvention_app', False)"-->
+<!--                       string="Subvention"-->
+<!--                />-->
+<!--                <field name="project_id"-->
+<!--                       required="1"-->
+<!--                       context="{'form_view_ref': 'project.project_project_view_form_simplified',}"-->
+<!--                       invisible="not context.get('in_subvention_app', False)"-->
+<!--                />-->
+<!--            </field>-->
+<!--        </field>-->
+<!--    </record>-->
+
+</odoo>
