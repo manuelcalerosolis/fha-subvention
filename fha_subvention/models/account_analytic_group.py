@@ -16,12 +16,16 @@ class AccountAnalyticGroup(models.Model):
         compute='_compute_readonly_subvention',
     )
 
-    def _get_default_subvention(self):
+    def _get_default_is_subvention(self):
         return self._context.get('in_subvention_app', False)
 
     subvention = fields.Boolean(
-        string='Subvention',
-        default=_get_default_subvention,
+        string="Subvention Deprecated",
+        default=False,
+    )
+    is_subvention = fields.Boolean(
+        string='Is Subvention',
+        default=_get_default_is_subvention,
     )
     code = fields.Char(
         string='Subvention Code',
@@ -55,6 +59,7 @@ class AccountAnalyticGroup(models.Model):
         required=True
     )
     total_subvention = fields.Monetary(
+        string='Total Subvention',
         help='The total subvention.',
         currency_field='currency_id',
         track_visibility='always',

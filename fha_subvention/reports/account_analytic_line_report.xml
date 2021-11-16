@@ -1,0 +1,150 @@
+<odoo>
+
+    <template
+        id="assets_backend"
+        name="stock_card_report assets"
+        inherit_id="web.assets_backend"
+    >
+        <xpath expr="." position="inside">
+            <link
+                href="/stock_card_report/static/src/css/report.css"
+                rel="stylesheet"
+            />
+            <script
+                type="text/javascript"
+                src="/stock_card_report/static/src/js/stock_card_report_backend.js"
+            />
+        </xpath>
+    </template>
+
+    <template id="fha_subvention.internal_layout">
+
+        <div class="header">
+            <div class="row">
+                <t t-set="title">Title Report</t>
+                <h4 class="mt0" t-esc="title" style="text-align: center;"/>
+            </div>
+        </div>
+
+        <div t-attf-class="article o_report_layout_clean"
+             t-att-data-oe-model="o and o._name">
+
+<!--            <t t-foreach="o.results" t-as="report_lines">-->
+<!--                &lt;!&ndash; Display filters &ndash;&gt;-->
+<!--                <t t-call="fha_subvention.account_analytic_line_report_filters"/>-->
+<!--                &lt;!&ndash; Display stock card table &ndash;&gt;-->
+<!--                <div class="act_as_table data_table mt4" style="width: 100%;">-->
+<!--                    &lt;!&ndash; Display header line&ndash;&gt;-->
+<!--                    <t t-call="fha_subvention.account_analytic_line_report_header"/>-->
+<!--                    <t t-call="fha_subvention.account_analytic_line_report_lines"/>-->
+<!--                </div>-->
+<!--                <p style="page-break-before:always;"/>-->
+<!--            </t>-->
+
+                <t t-call="web.address_layout"/>
+            <t t-raw="0"/>
+        </div>
+
+        <div class="footer">
+            <div class="row">
+                <div class="col-6 custom_footer">
+                    <span
+                        t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"
+                    />
+                </div>
+                <div class="col-6 text-right custom_footer">
+                    <span class="page"/>/
+                    <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="report_buttons">
+        <div class="button_row">
+            <button class="o_stock_card_reports_print btn btn-sm oe_button">
+                <span class="fa fa-print"/>Print
+            </button>
+            <button class="o_stock_card_reports_export btn btn-sm oe_button">
+                <span class="fa fa-download"/>Export
+            </button>
+        </div>
+    </template>
+
+    <template id="report_stock_card_report_html">
+        <div class="o_stock_card_reports_page">
+            <t t-call="fha_subvention.report_buttons"/>
+            <t t-call="fha_subvention.account_analytic_line_report_base"/>
+        </div>
+    </template>
+
+    <template id="fha_subvention.account_analytic_line_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="fha_subvention.account_analytic_line_report_base"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="fha_subvention.account_analytic_line_report_base">
+        <t t-call="fha_subvention.internal_layout">
+            <div class="page">
+
+                <div class="row">
+                    <t t-set="title">Title Report</t>
+                    <h4 class="mt0" t-esc="title" style="text-align: center;"/>
+                </div>
+
+                <t t-foreach="o.results" t-as="report_lines">
+                    <!-- Display filters -->
+                    <t t-call="fha_subvention.account_analytic_line_report_filters"/>
+                    <!-- Display stock card table -->
+                    <div class="act_as_table data_table mt4" style="width: 100%;">
+                        <!-- Display header line-->
+                        <t t-call="fha_subvention.account_analytic_line_report_header"/>
+                        <t t-call="fha_subvention.account_analytic_line_report_lines"/>
+                    </div>
+                    <p style="page-break-before:always;"/>
+                </t>
+            </div>
+        </t>
+    </template>
+
+    <template id="fha_subvention.account_analytic_line_report_filters">
+        <div class="act_as_table data_table" style="width: 100%;">
+            <div class="act_as_row labels">
+                <div class="act_as_cell">Date From</div>
+                <div class="act_as_cell">Date To</div>
+            </div>
+            <div class="act_as_row">
+                <div class="act_as_cell">
+                    <span t-field="o.date_from"/>
+                </div>
+                <div class="act_as_cell">
+                    <span t-field="o.date_to"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="fha_subvention.account_analytic_line_report_header">
+        <div class="act_as_thead">
+            <div class="act_as_row labels">
+                <div class="act_as_cell">Date</div>
+                <div class="act_as_cell">Name</div>
+            </div>
+        </div>
+    </template>
+
+    <template id="fha_subvention.account_analytic_line_report_lines">
+        <div class="act_as_row lines">
+            <div class="act_as_cell left">
+                <t t-esc="report_lines.date.strftime('%Y-%m-%d')"/>
+            </div>
+            <div class="act_as_cell left">
+                <t t-esc="report_lines.name"/>
+            </div>
+        </div>
+    </template>
+
+</odoo>

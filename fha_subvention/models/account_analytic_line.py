@@ -18,16 +18,20 @@ class AccountAnalyticLine(models.Model):
         store=True,
     )
     subvention = fields.Boolean(
-        string='Subvention',
+        string="Subvention Deprecated",
+        default=False,
+    )
+    is_subvention = fields.Boolean(
+        string='Is Subvention',
         related='group_id.subvention',
     )
     account_id = fields.Many2one(
         'account.analytic.account',
-        'Analytic Account',
+        'Subvention',
         required=False,
         ondelete='restrict',
         index=True,
-        domain="[('subvention', '=', True), '|', ('company_id', '=', False), ('company_id', '=', company_id)]",
+        domain="[('is_subvention', '=', True)]",
     )
     justified_percentage = fields.Float(
         related='account_id.percentage',
@@ -40,21 +44,13 @@ class AccountAnalyticLine(models.Model):
         currency_field='currency_id',
         compute='_compute_justified_amount',
     )
-    is_subvention_app = fields.Boolean(
-        compute='_compute_is_subvention_app',
-    )
 
-    def _timesheet_preprocess(self, vals):
-        context = dict(self._context or {})
-        result = super()._timesheet_preprocess(vals)
-        if not context.get('is_subvention_app', False) and result.get('account_id'):
-            result.pop('account_id')
-        return result
-
-    def _compute_is_subvention_app(self):
-        context = dict(self._context or {})
-        for record in self:
-            record.is_subvention_app = context.get('is_subvention_app', False)
+    # def _timesheet_preprocess(self, vals):
+    #     context = dict(self._context or {})
+    #     result = super()._timesheet_preprocess(vals)
+    #     if not context.get('is_subvention_app', False) and result.get('account_id'):
+    #         result.pop('account_id')
+    #     return result
 
     @api.depends('amount')
     def _compute_amount(self):

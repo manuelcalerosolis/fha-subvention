@@ -11,12 +11,16 @@ class AccountAnalyticAccount(models.Model):
     _rec_name = 'complete_name'
     _order = 'complete_name'
 
-    def _get_default_subvention(self):
+    def _get_default_is_subvention(self):
         return self._context.get('in_subvention_app', False)
 
     subvention = fields.Boolean(
-        string="Subvention",
-        default=_get_default_subvention,
+        string="Subvention Deprecated",
+        default=False,
+    )
+    is_subvention = fields.Boolean(
+        string="Is Subvention",
+        default=_get_default_is_subvention,
     )
     complete_name = fields.Char(
         string='Complete Name',
