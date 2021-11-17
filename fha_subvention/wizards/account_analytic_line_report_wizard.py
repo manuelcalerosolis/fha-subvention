@@ -21,9 +21,15 @@ class AccountAnalyticLineReportWizard(models.TransientModel):
         required=True,
         default=fields.Date.context_today,
     )
+    analytic_group_id = fields.Many2one(
+        comodel_name='account.analytic.group',
+        required=True,
+        string='Subvention',
+        domain="[('is_subvention', '=', True)]"
+    )
     account_id = fields.Many2one(
-        'account.analytic.account',
-        'Subvention',
+        comodel_name='account.analytic.account',
+        string='Expense Type',
         required=True,
         domain="[('is_subvention', '=', True)]",
     )
@@ -56,6 +62,7 @@ class AccountAnalyticLineReportWizard(models.TransientModel):
         return {
             "date_from": self.date_from,
             "date_to": self.date_to or fields.Date.context_today(self),
+            "analytic_group_id": self.analytic_group_id.id,
         }
 
     def _export(self):

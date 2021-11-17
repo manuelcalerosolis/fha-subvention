@@ -1,53 +1,63 @@
 <odoo>
-    <template id="assets_backend" name="stock_card_report assets" inherit_id="web.assets_backend">
-        <xpath expr="." position="inside">
-            <link href="/stock_card_report/static/src/css/report.css" rel="stylesheet"/>
-            <script type="text/javascript" src="/stock_card_report/static/src/js/stock_card_report_backend.js"/>
-        </xpath>
-    </template>
     <template id="fha_subvention.internal_layout">
         <t t-name="internal_layout">
             <div class="header">
                 <div class="row">
-                    <t t-set="title">Title Report</t>
-                    <h4 class="mt0" t-esc="title" style="text-align: center;"/>
+                    <t t-set="title">Subventions Reports</t>
+                    <h1 class="mt0" t-esc="title" style="text-align: Left;"/>
                 </div>
+
+                <div class="row">
+                    <h4 class="mt0" style="text-align: Left;">
+                        <spam t-esc="o.analytic_group_id.code" style="font-weight: bold;"/>
+                        <spam>-</spam>
+                        <spam t-esc="o.analytic_group_id.name"/>
+                    </h4>
+                </div>
+
+                <div class="row">
+                    <spam>Total Subvention :</spam>
+                    <spam t-esc="o.analytic_group_id.total_subvention"
+                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                    <spam>-</spam>
+                    <spam>Justified Subvention :</spam>
+                    <spam t-esc="o.analytic_group_id.justified_subvention"
+                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                </div>
+
+                <div class="row">
+                    <spam>Period :</spam>
+                    <spam t-esc="o.analytic_group_id.date_init"/>
+                    <spam>to</spam>
+                    <spam t-esc="o.analytic_group_id.date_end"/>
+                </div>
+
             </div>
+
             <div t-attf-class="article o_report_layout_clean" t-att-data-oe-model="o and o._name">
                 <t t-call="web.address_layout"/>
                 <t t-raw="0"/>
             </div>
+
             <div class="footer">
-                <div class="row">
-                    <div class="col-6 custom_footer">
+                <div class="row mt8">
+                    <div class="col-10">
                         <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
                     </div>
-                    <div class="col-6 text-right custom_footer">
-                        <span class="page"/>
-                        /
-                        <span class="topage"/>
+                    <div class="col-2">
+                        <ul
+                            class="list-inline pagenumber float-right text-center"
+                        >
+                            <li class="list-inline-item">
+                                <strong>
+                                    <span class="page"/>
+                                    /
+                                    <span class="topage"/>
+                                </strong>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-            </div>
-        </t>
-    </template>
-    <template id="report_buttons">
-        <div class="button_row">
-            <button class="o_stock_card_reports_print btn btn-sm oe_button">
-                <span class="fa fa-print"/>
-                Print
-            </button>
-            <button class="o_stock_card_reports_export btn btn-sm oe_button">
-                <span class="fa fa-download"/>
-                Export
-            </button>
-        </div>
-    </template>
-    <template id="fha_subvention.report_stock_card_report_html">
-        <t t-name="report_stock_card_report_html">
-            <div class="o_stock_card_reports_page">
-                <t t-call="fha_subvention.report_buttons"/>
-                <t t-call="fha_subvention.account_analytic_line_report_base"/>
             </div>
         </t>
     </template>
@@ -62,38 +72,88 @@
     </template>
     <template id="fha_subvention.account_analytic_line_report_base">
         <t t-name="account_analytic_line_report_base">
-<!--            <t t-call="web.external_layout">-->
+            <!--            <t t-call="web.external_layout">-->
             <t t-call="fha_subvention.internal_layout">
                 <div class="page">
+                    <t t-set="account_id" t-value=""/>
+
                     <table>
-                        <thead>
-                            <th>Nombre</th>
-                            <th>Fecha</th>
-                        </thead>
                         <tbody>
                             <t t-foreach="o.results" t-as="report_lines">
+                                <t t-if="account_id != report_lines.account_id">
+                                    <t
+                                        t-set="account_id"
+                                        t-value="report_lines.account_id"
+                                    />
+                                    <tr style="line-height:10px; margin: 0px 0px 0px 0px; border: 2px;">
+                                        <td style="border: 2px;">
+                                            <span t-field="report_lines.account_id.name" style="font-weight: bold;"/>
+                                        </td>
+                                        <td style="border: 2px;">
+                                            <span t-field="report_lines.account_id.code" style="font-weight: bold;"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 2px;">
+                                            <span>Percentage : </span>
+                                            <span t-field="report_lines.account_id.percentage"
+                                                  style="font-weight: bold;"/>%
+                                        </td>
+                                        <td style="border: 2px;">
+                                            <span>Total Subvention : </span>
+                                            <span t-field="report_lines.account_id.total_subvention"
+                                                  style="font-weight: bold;"
+                                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                        </td>
+                                        <td style="border: 2px;">
+                                            <span>Total Justified : </span>
+                                            <span t-field="report_lines.account_id.total_expense"
+                                                  style="font-weight: bold;"
+                                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                        </td>
+                                        <td style="border: 2px;">
+                                            <span>Percentage Justified : </span>
+                                            <span t-field="report_lines.account_id.percentage_expense"
+                                                  style="font-weight: bold;"
+                                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Expense Type</td>
+                                        <td>Reference</td>
+                                        <td>Percentage</td>
+                                        <td>Total Subvention</td>
+                                        <td>Total Expense</td>
+                                        <td>Percentage expense</td>
+                                        <td>Nombre</td>
+                                        <td>Fecha</td>
+                                    </tr>
+                                </t>
                                 <tr>
+                                    <td>
+                                        <span t-field="report_lines.move_id.move_id"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="report_lines.date.strftime('%d-%m-%Y')"/>
+                                    </td>
                                     <td>
                                         <span t-field="report_lines.name"/>
                                     </td>
                                     <td>
-                                        <span t-esc="report_lines.date.strftime('%Y-%m-%d')"/>
+                                        <span t-field="report_lines.amount"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="report_lines.account_id.percentage"/>
+                                    </td>
+                                    <td>
+<!--                                        <span t-field="report_lines.justified_amount"/>-->
                                     </td>
                                 </tr>
+
                             </t>
                         </tbody>
                     </table>
-                    <!--                 <t t-foreach="o.results" t-as="report_lines"> -->
-                    <!--                     &lt;!&ndash; Display filters &ndash;&gt; -->
-                    <!--                     <t t-call="fha_subvention.account_analytic_line_report_filters"/> -->
-                    <!--                     &lt;!&ndash; Display stock card table &ndash;&gt; -->
-                    <!--                     <div class="act_as_table data_table mt4" style="width: 100%;"> -->
-                    <!--                         &lt;!&ndash; Display header line&ndash;&gt; -->
-                    <!--                         <t t-call="fha_subvention.account_analytic_line_report_header"/> -->
-                    <!--                         <t t-call="fha_subvention.account_analytic_line_report_lines"/> -->
-                    <!--                     </div> -->
-                    <!--                     <p style="page-break-before:always;"/> -->
-                    <!--                 </t> -->
                 </div>
             </t>
         </t>

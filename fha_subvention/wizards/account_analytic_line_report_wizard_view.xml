@@ -9,7 +9,7 @@
                     <group name="date_range">
                         <field name="date_from" />
                         <field name="date_to" />
-                        <field name="account_id" />
+                        <field name="analytic_group_id" />
                     </group>
                 </group>
                 <group name="other_filters">

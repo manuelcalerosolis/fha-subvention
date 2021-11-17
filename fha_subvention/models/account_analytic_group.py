@@ -20,7 +20,7 @@ class AccountAnalyticGroup(models.Model):
         return self._context.get('in_subvention_app', False)
 
     subvention = fields.Boolean(
-        string="Subvention Deprecated",
+        string='Subvention Deprecated',
         default=False,
     )
     is_subvention = fields.Boolean(

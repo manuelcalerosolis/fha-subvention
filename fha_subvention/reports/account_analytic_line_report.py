@@ -11,10 +11,15 @@ class AccountAnalyticLineView(models.TransientModel):
 
     date = fields.Datetime()
     name = fields.Char()
-    # name = fields.Many2one(comodel_name="product.product")
+    amount = fields.Float()
+    justified_percentage = fields.Float(
+        digits=(16, 2),
+    )
     account_id = fields.Many2one(
-        'account.analytic.account',
-        'Subvention',
+        comodel_name='account.analytic.account',
+    )
+    move_id = fields.Many2one(
+        comodel_name='account.move.line',
     )
 
 
@@ -24,7 +29,16 @@ class AccountAnalyticLineReport(models.TransientModel):
 
     date_from = fields.Date()
     date_to = fields.Date()
-    # account_id = fields.Many2one('account.analytic.account')
+    analytic_group_id = fields.Many2one(
+        comodel_name='account.analytic.group',
+    )
+    account_id = fields.Many2one(
+        comodel_name='account.analytic.account',
+    )
+    currency_id = fields.Many2one(
+        comodel_name='res.currency',
+        default=lambda self: self.env.company.currency_id.id,
+    )
     # Data fields, used to browse report data
     results = fields.Many2many(
         comodel_name="account.analytic.line.view",
@@ -37,29 +51,37 @@ class AccountAnalyticLineReport(models.TransientModel):
         ReportLine = self.env["account.analytic.line.view"]
         date_from = self.date_from or "0001-01-01"
         date_to = self.date_to or fields.Date.context_today(self)
-        # account_id = self.account_id.id
+        account_ids = self.analytic_group_id.account_analytic_account_ids.ids
 
         print(":"*80)
         print("date_from :", date_from)
         print("date_to :", date_to)
+        print("account_ids :", account_ids)
+
         print(":"*80)
 
         self._cr.execute(
             """
             SELECT
                 line.name,
-                line.date
+                line.date,
+                ABS(line.amount) AS amount,
+                line.account_id,
+                line.move_id
             FROM
                 account_analytic_line line
             WHERE
                 CAST(line.date AS date) >= %s
                 and
                 CAST(line.date AS date) <= %s
+                and
+                account_id in %s
             ORDER BY line.date
         """,
             (
                 date_from,
-                date_to
+                date_to,
+                tuple(account_ids)
             ),
         )
         results = self._cr.dictfetchall()

@@ -7,7 +7,7 @@ from odoo import api, fields, models, _
 class AccountAnalyticLine(models.Model):
     _inherit = 'account.analytic.line'
 
-    move_name = fields.Many2one(
+    move_move_id = fields.Many2one(
         related='move_id.move_id',
         string='Invoice Number',
         readonly=True,
@@ -42,6 +42,7 @@ class AccountAnalyticLine(models.Model):
         string='Justified Amount',
         help='The justified amount.',
         currency_field='currency_id',
+        store=True,
         compute='_compute_justified_amount',
     )
 
