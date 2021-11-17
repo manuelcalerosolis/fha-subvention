@@ -11,8 +11,22 @@ class AccountAnalyticLineReportWizard(models.TransientModel):
     _name = "account.analytic.line.report.wizard"
     _description = "Account Analytic Line Report Wizard"
 
-    date_from = fields.Date("Start Date", required=True, default=time.strftime('%Y-01-01'))
-    date_to = fields.Date("End Date", required=True, default=fields.Date.context_today)
+    date_from = fields.Date(
+        "Start Date",
+        required=True,
+        default=time.strftime('%Y-01-01'),
+    )
+    date_to = fields.Date(
+        "End Date",
+        required=True,
+        default=fields.Date.context_today,
+    )
+    account_id = fields.Many2one(
+        'account.analytic.account',
+        'Subvention',
+        required=True,
+        domain="[('is_subvention', '=', True)]",
+    )
 
     def button_export_html(self):
         self.ensure_one()

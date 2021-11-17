@@ -10,7 +10,12 @@ class AccountAnalyticLineView(models.TransientModel):
     _order = "date"
 
     date = fields.Datetime()
-    name = fields.Many2one(comodel_name="product.product")
+    name = fields.Char()
+    # name = fields.Many2one(comodel_name="product.product")
+    account_id = fields.Many2one(
+        'account.analytic.account',
+        'Subvention',
+    )
 
 
 class AccountAnalyticLineReport(models.TransientModel):
@@ -19,7 +24,7 @@ class AccountAnalyticLineReport(models.TransientModel):
 
     date_from = fields.Date()
     date_to = fields.Date()
-
+    # account_id = fields.Many2one('account.analytic.account')
     # Data fields, used to browse report data
     results = fields.Many2many(
         comodel_name="account.analytic.line.view",
@@ -32,12 +37,12 @@ class AccountAnalyticLineReport(models.TransientModel):
         ReportLine = self.env["account.analytic.line.view"]
         date_from = self.date_from or "0001-01-01"
         date_to = self.date_to or fields.Date.context_today(self)
+        # account_id = self.account_id.id
 
         print(":"*80)
         print("date_from :", date_from)
         print("date_to :", date_to)
         print(":"*80)
-
 
         self._cr.execute(
             """
@@ -54,7 +59,7 @@ class AccountAnalyticLineReport(models.TransientModel):
         """,
             (
                 date_from,
-                date_to,
+                date_to
             ),
         )
         results = self._cr.dictfetchall()

@@ -31,7 +31,7 @@ class AccountAnalyticLine(models.Model):
         required=False,
         ondelete='restrict',
         index=True,
-        domain="[('is_subvention', '=', True)]",
+        domain="[('is_subvention', '=', True), '|', ('company_id', '=', False), ('company_id', '=', company_id)]",
     )
     justified_percentage = fields.Float(
         related='account_id.percentage',
@@ -44,13 +44,6 @@ class AccountAnalyticLine(models.Model):
         currency_field='currency_id',
         compute='_compute_justified_amount',
     )
-
-    # def _timesheet_preprocess(self, vals):
-    #     context = dict(self._context or {})
-    #     result = super()._timesheet_preprocess(vals)
-    #     if not context.get('is_subvention_app', False) and result.get('account_id'):
-    #         result.pop('account_id')
-    #     return result
 
     @api.depends('amount')
     def _compute_amount(self):
