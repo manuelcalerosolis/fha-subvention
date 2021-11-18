@@ -3,33 +3,32 @@
         <t t-name="internal_layout">
             <div class="header">
                 <div class="row">
-                    <t t-set="title">Subventions Reports</t>
-                    <h1 class="mt0" t-esc="title" style="text-align: Left;"/>
-                </div>
-
-                <div class="row">
-                    <h4 class="mt0" style="text-align: Left;">
+                    <t t-set="title">Subventions Reports:</t>
+                    <h2 class="mt0" style="text-align: Left;">
+                        <spam>Subventions Reports:</spam>
                         <spam t-esc="o.analytic_group_id.code" style="font-weight: bold;"/>
                         <spam>-</spam>
-                        <spam t-esc="o.analytic_group_id.name"/>
-                    </h4>
+                        <spam t-esc="o.analytic_group_id.name" style="font-weight: bold;"/>
+                    </h2>
+
                 </div>
 
                 <div class="row">
                     <spam>Total Subvention :</spam>
                     <spam t-esc="o.analytic_group_id.total_subvention"
+                          style="font-weight: bold;"
                           t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                     <spam>-</spam>
                     <spam>Justified Subvention :</spam>
                     <spam t-esc="o.analytic_group_id.justified_subvention"
+                          style="font-weight: bold;"
                           t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                </div>
-
-                <div class="row">
                     <spam>Period :</spam>
-                    <spam t-esc="o.analytic_group_id.date_init"/>
+                    <spam t-esc="o.analytic_group_id.date_init"
+                          style="font-weight: bold;"/>
                     <spam>to</spam>
-                    <spam t-esc="o.analytic_group_id.date_end"/>
+                    <spam t-esc="o.analytic_group_id.date_end"
+                          style="font-weight: bold;"/>
                 </div>
 
             </div>
@@ -65,19 +64,19 @@
         <t t-name="account_analytic_line_pdf">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
-                    <t t-call="fha_subvention.account_analytic_line_report_base"/>
+                    <t t-call="fha_subvention.account_analytic_line_report_base"
+                       t-lang="o.env.user.lang"/>
                 </t>
             </t>
         </t>
     </template>
     <template id="fha_subvention.account_analytic_line_report_base">
         <t t-name="account_analytic_line_report_base">
-            <!--            <t t-call="web.external_layout">-->
             <t t-call="fha_subvention.internal_layout">
                 <div class="page">
                     <t t-set="account_id" t-value=""/>
 
-                    <table>
+                    <table class="table">
                         <tbody>
                             <t t-foreach="o.results" t-as="report_lines">
                                 <t t-if="account_id != report_lines.account_id">
@@ -85,52 +84,45 @@
                                         t-set="account_id"
                                         t-value="report_lines.account_id"
                                     />
-                                    <tr style="line-height:10px; margin: 0px 0px 0px 0px; border: 2px;">
-                                        <td style="border: 2px;">
-                                            <span t-field="report_lines.account_id.name" style="font-weight: bold;"/>
-                                        </td>
-                                        <td style="border: 2px;">
-                                            <span t-field="report_lines.account_id.code" style="font-weight: bold;"/>
-                                        </td>
+                                    <tr style="line-height:10px; min-height: 10px; max-height: 10px; height: 10px; border: 2px;">
 
+                                        <td colspan="6">
+                                            <span t-field="report_lines.account_id.name"
+                                                  style="font-size: 1.5em; font-weight: bold;"/>
+                                            <span> : </span>
+                                            <span t-field="report_lines.account_id.code"
+                                                  style="font-size: 1.5em; font-weight: bold;"/>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td style="border: 2px;">
-                                            <span>Percentage : </span>
+                                    <tr style="line-height:10px; min-height: 10px; max-height: 10px; height: 10px; border: 2px;">
+                                        <td colspan="6" style="border: 2px;">
+                                            <span>Percentage :</span>
                                             <span t-field="report_lines.account_id.percentage"
                                                   style="font-weight: bold;"/>%
-                                        </td>
-                                        <td style="border: 2px;">
-                                            <span>Total Subvention : </span>
+                                            <span>Total Subvention :</span>
                                             <span t-field="report_lines.account_id.total_subvention"
                                                   style="font-weight: bold;"
                                                   t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                                        </td>
-                                        <td style="border: 2px;">
-                                            <span>Total Justified : </span>
+                                            <span>Total Justified :</span>
                                             <span t-field="report_lines.account_id.total_expense"
                                                   style="font-weight: bold;"
                                                   t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                                        </td>
-                                        <td style="border: 2px;">
-                                            <span>Percentage Justified : </span>
+                                            <span>Percentage Justified :</span>
                                             <span t-field="report_lines.account_id.percentage_expense"
                                                   style="font-weight: bold;"
                                                   t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr style="line-height:10px; min-height: 10px; max-height: 10px; height: 10px; border: 2px;">
                                         <td>Expense Type</td>
-                                        <td>Reference</td>
-                                        <td>Percentage</td>
-                                        <td>Total Subvention</td>
-                                        <td>Total Expense</td>
-                                        <td>Percentage expense</td>
-                                        <td>Nombre</td>
-                                        <td>Fecha</td>
+                                        <td>Date</td>
+                                        <td>Description</td>
+                                        <td style="text-align: right;">Amount</td>
+                                        <td style="text-align: right;">Percentage</td>
+                                        <td style="text-align: right;">Justified Amount</td>
                                     </tr>
                                 </t>
-                                <tr>
+                                <tr style="line-height:10px; margin: 0px 0px 0px 0px; border: 2px;">
                                     <td>
                                         <span t-field="report_lines.move_id.move_id"/>
                                     </td>
@@ -140,14 +132,16 @@
                                     <td>
                                         <span t-field="report_lines.name"/>
                                     </td>
-                                    <td>
-                                        <span t-field="report_lines.amount"/>
+                                    <td style="text-align: right;">
+                                        <span t-field="report_lines.amount"
+                                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                     </td>
-                                    <td>
-                                        <span t-field="report_lines.account_id.percentage"/>
+                                    <td style="text-align: right;">
+                                        <span t-field="report_lines.account_id.percentage"/>%
                                     </td>
-                                    <td>
-<!--                                        <span t-field="report_lines.justified_amount"/>-->
+                                    <td style="text-align: right;">
+                                        <span t-field="report_lines.justified_amount"
+                                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                     </td>
                                 </tr>
 

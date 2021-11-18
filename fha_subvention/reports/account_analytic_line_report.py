@@ -12,9 +12,7 @@ class AccountAnalyticLineView(models.TransientModel):
     date = fields.Datetime()
     name = fields.Char()
     amount = fields.Float()
-    justified_percentage = fields.Float(
-        digits=(16, 2),
-    )
+    justified_amount = fields.Float()
     account_id = fields.Many2one(
         comodel_name='account.analytic.account',
     )
@@ -66,6 +64,7 @@ class AccountAnalyticLineReport(models.TransientModel):
                 line.name,
                 line.date,
                 ABS(line.amount) AS amount,
+                line.justified_amount,
                 line.account_id,
                 line.move_id
             FROM
