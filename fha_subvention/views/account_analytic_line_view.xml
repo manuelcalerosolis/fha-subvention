@@ -47,7 +47,7 @@
             <tree editable="top" string="Timesheet Activities">
                 <field name="is_subvention" invisible="1"/>
                 <field name="date"/>
-                <field name="employee_id" invisible="1"/>
+                <field name="employee_id"/>
                 <field name="name"/>
                 <field name="project_id"/>
                 <field name="task_id"
@@ -59,26 +59,5 @@
             </tree>
         </field>
     </record>
-
-    <!--    <record id="hr_timesheet_line_subvention_tree" model="ir.ui.view">-->
-    <!--        <field name="model">account.analytic.line</field>-->
-    <!--        <field name="inherit_id"-->
-    <!--               ref="hr_timesheet.hr_timesheet_line_tree" />-->
-    <!--        <field name="arch" type="xml">-->
-
-    <!--            <field name="task_id" position="after">-->
-    <!--                <field name="is_subvention_app" />-->
-    <!--                <field name="account_id"-->
-    <!--                       invisible="not context.get('in_subvention_app', False)"-->
-    <!--                       string="Subvention"-->
-    <!--                />-->
-    <!--                <field name="project_id"-->
-    <!--                       required="1"-->
-    <!--                       context="{'form_view_ref': 'project.project_project_view_form_simplified',}"-->
-    <!--                       invisible="not context.get('in_subvention_app', False)"-->
-    <!--                />-->
-    <!--            </field>-->
-    <!--        </field>-->
-    <!--    </record>-->
 
 </odoo>
