@@ -1,6 +1,6 @@
 <odoo>
 
-    <record id="paper_format_subvention" model="report.paperformat">
+    <record id="fha_subvention.paper_format_subvention" model="report.paperformat">
         <field name="name">Subvention A4</field>
         <field name="default" eval="True"/>
         <field name="format">custom</field>

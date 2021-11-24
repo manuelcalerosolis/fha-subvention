@@ -1,5 +1,5 @@
 <odoo>
-    <record id="fha_subvention_view_tree" model="ir.ui.view">
+    <record id="fha_subvention.fha_subvention_view_tree" model="ir.ui.view">
         <field name="name">fha.subvention.tree</field>
         <field name="model">account.analytic.group</field>
         <field name="arch" type="xml">
@@ -16,7 +16,7 @@
             </tree>
         </field>
     </record>
-    <record id="fha_subvention_account_analytic_account_view_tree" model="ir.ui.view">
+    <record id="fha_subvention.fha_subvention_account_analytic_account_view_tree" model="ir.ui.view">
         <field name="name">fha.subvention.account.analytic.account.view.tree</field>
         <field name="model">account.analytic.account</field>
         <field name="arch" type="xml">
@@ -31,7 +31,7 @@
         </field>
     </record>
 
-    <record id="fha_subvention_account_analytic_account_view_filter" model="ir.ui.view">
+    <record id="fha_subvention.fha_subvention_account_analytic_account_view_filter" model="ir.ui.view">
         <field name="name">fha.subvention.account.analytic.account.view.filter</field>
         <field name="model">account.analytic.account</field>
         <field name="arch" type="xml">
@@ -50,7 +50,7 @@
         </field>
     </record>
 
-    <record id="fha_subvention_view_filter" model="ir.ui.view">
+    <record id="fha_subvention.fha_subvention_view_filter" model="ir.ui.view">
         <field name="name">fha.subvention.view.filter</field>
         <field name="model">account.analytic.group</field>
         <field name="priority" eval="1"/>
@@ -65,7 +65,7 @@
         </field>
     </record>
 
-    <record id="fha_subvention_action"
+    <record id="fha_subvention.fha_subvention_action"
             model="ir.actions.act_window">
         <field name="name">Subventions</field>
         <field name="type">ir.actions.act_window</field>
@@ -80,26 +80,26 @@
     </record>
 
     <menuitem name="Subventions"
-              id="fha_subvention_menu"
+              id="fha_subvention.fha_subvention_menu"
               sequence="1"
               web_icon="fha_subvention,static/description/icon.png"
               groups="fha_subvention.group_fha_user_subvention"/>
 
-    <menuitem id="fha_subvention_menu_subvention"
+    <menuitem id="fha_subvention.fha_subvention_menu_subvention"
               name="Subventions"
               parent="fha_subvention_menu"
               action="fha_subvention_action"
               sequence="2"
               groups="fha_subvention.group_fha_user_subvention"/>
 
-    <menuitem id="fha_subvention_menu_timesheet"
+    <menuitem id="fha_subvention.fha_subvention_menu_timesheet"
               name="Timesheet"
               parent="fha_subvention_menu"
               action="fha_timesheet_action"
               sequence="2"
               groups="fha_subvention.group_fha_user_subvention"/>
 
-    <menuitem id="fha_subvention_menu_report"
+    <menuitem id="fha_subvention.fha_subvention_menu_report"
               name="Report"
               parent="fha_subvention_menu"
               action="action_account_analytic_line_report_wizard"

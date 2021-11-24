@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
-    <record id="account_analytic_group_form_view" model="ir.ui.view">
+    <record id="fha_subvention.account_analytic_group_form_view" model="ir.ui.view">
         <field name="name">account.analytic.group.form</field>
         <field name="model">account.analytic.group</field>
         <field name="inherit_id" ref="analytic.account_analytic_group_form_view"/>
