@@ -278,7 +278,7 @@ msgstr "Número Factura"
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_group__is_subvention
 #: model:ir.model.fields,field_description:fha_subvention.field_account_analytic_line__is_subvention
 msgid "Is Subvention"
-msgstr "Es Subvención"
+msgstr "Subvención"
 
 #. module: fha_subvention
 #: model_terms:ir.ui.view,arch_db:fha_subvention.account_analytic_group_form_view

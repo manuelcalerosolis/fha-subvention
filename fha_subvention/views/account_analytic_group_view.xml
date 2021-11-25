@@ -12,8 +12,11 @@
             </xpath>
 
             <xpath expr="//form/sheet/group[2]" position="after">
-                <field name="is_subvention" invisible="1"/>
                 <field name="is_readonly" invisible="1"/>
+                <label for="is_subvention"
+                       groups="fha_subvention.group_fha_administrator_subvention"/>
+                <field name="is_subvention"
+                       groups="fha_subvention.group_fha_administrator_subvention"/>
                 <group attrs="{'invisible': [('is_subvention', '=', False)]}">
                     <group>
                         <field name="code"
