@@ -27,12 +27,6 @@ class AccountAnalyticLineReportWizard(models.TransientModel):
         string='Subvention',
         domain="[('is_subvention', '=', True)]"
     )
-    account_id = fields.Many2one(
-        comodel_name='account.analytic.account',
-        string='Expense Type',
-        required=True,
-        domain="[('is_subvention', '=', True)]",
-    )
 
     def button_export_html(self):
         self.ensure_one()

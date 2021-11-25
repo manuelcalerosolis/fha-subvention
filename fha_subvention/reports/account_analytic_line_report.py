@@ -23,7 +23,7 @@ class AccountAnalyticLineView(models.TransientModel):
         comodel_name='hr.employee',
     )
     partner_id = fields.Many2one(
-        comodel_name='res.partner'
+        comodel_name='res.partner',
     )
 
 class AccountAnalyticLineReport(models.TransientModel):
@@ -66,8 +66,40 @@ class AccountAnalyticLineReport(models.TransientModel):
         print("date_from :", date_from)
         print("date_to :", date_to)
         print("account_ids :", account_ids)
-
         print(":"*80)
+
+        print("#"*80)
+        print(
+            """
+            SELECT
+                line.name,
+                line.date,
+                ABS(line.amount) AS amount,
+                line.justified_amount,
+                line.account_id,
+                line.employee_id,
+                line.move_id,
+                partner.id AS partner_id
+            FROM
+                account_analytic_line line
+                LEFT JOIN account_move_line account_move_line ON account_move_line.id = line.move_id
+                LEFT JOIN account_move account_move ON account_move.id = account_move_line.move_id
+                LEFT JOIN res_partner partner ON partner.id = account_move.partner_id
+            WHERE
+                CAST(line.date AS date) >= %s
+                and
+                CAST(line.date AS date) <= %s
+                and
+                line.account_id in %s
+            ORDER BY line.account_id, line.employee_id, partner_id, line.date
+        """,
+            (
+                date_from,
+                date_to,
+                tuple(account_ids)
+            ),
+        )
+        print("#"*80)
 
         self._cr.execute(
             """
