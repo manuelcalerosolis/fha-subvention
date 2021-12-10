@@ -4,9 +4,9 @@
 <odoo>
 
     <menuitem
-        id="menu_infortisa_product_import"
-        name="Employee import"
-        action="infortisa_product_import_action"
+        id="menu_employee_timesheet_cost_import"
+        name="Employee Import"
+        action="employee_timesheet_cost_import_action"
         parent="hr.menu_hr_root"
         groups="hr.group_hr_manager"
     />

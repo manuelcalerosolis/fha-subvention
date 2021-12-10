@@ -9,7 +9,7 @@
         Wizard to Import FHA Employee.
         """,
     "data": [
-        "wizard/infortisa_product_import.xml",
+        "wizard/employee_timesheet_cost_import.xml",
         "views/menu.xml",],
     "installable": True,
     "auto_install": True,
