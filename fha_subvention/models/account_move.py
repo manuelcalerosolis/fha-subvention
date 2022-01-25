@@ -10,7 +10,8 @@ class AccountMove(models.Model):
 
     def action_post(self):
         for record in self:
-            for line in record.line_ids.filtered(lambda l: l.analytic_account_id):
+            for line in record.line_ids.filtered(lambda l: l.analytic_account_id and
+                                                           l.analytic_account_id.total_expense > 0):
                 if abs(
                     line.analytic_account_id.total_expense) + line.price_subtotal > line.analytic_account_id.total_subvention:
                     raise ValidationError(
