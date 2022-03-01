@@ -81,9 +81,9 @@ class AccountAnalyticGroup(models.Model):
         track_visibility='always',
     )
     account_analytic_account_ids = fields.One2many(
+        string='Subvention items',
         comodel_name='account.analytic.account',
         inverse_name='group_id',
-        string='Subvention items',
         track_visibility='always',
     )
     justified_subvention = fields.Monetary(

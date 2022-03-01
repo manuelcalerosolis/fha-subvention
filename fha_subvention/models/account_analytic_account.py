@@ -136,17 +136,3 @@ class AccountAnalyticAccount(models.Model):
             'res_id': self.id,
             'context': dict(self.env.context),
         }
-
-    def button_confirm(self):
-        print("",self.account_analytic_line_ids)
-
-        # for record in self:
-        #     for line in record.account_analytic_line_ids.filtered(lambda l: l.analytic_account_id):
-        #         if abs(
-        #             line.analytic_account_id.total_expense) + line.price_subtotal > line.analytic_account_id.total_subvention:
-        #             raise ValidationError(
-        #                 _(
-        #                     "You cannot validate a bill the line '%s' exceeds the limit of the item."
-        #                 ) % line.name
-        #             )
-
