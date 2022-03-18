@@ -1,15 +1,16 @@
 {
-    "name": "FHA Employee Import",
-    "category": "Product",
+    "name": "FHA DMS Employee",
+    "category": "Employee",
     "version": "13.0.1.0",
     "depends": [
-        "hr_timesheet"
+        "hr",
+        "dms",
+        "dms_field",
     ],
     "description": """
-        Wizard to Import FHA Employee.
+        Create DMS page  Employee.
         """,
     "data": [
-        "wizard/employee_timesheet_cost_import.xml",
         "views/hr_employee_form_view.xml",],
     "installable": True,
     "auto_install": True,
