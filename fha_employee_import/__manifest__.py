@@ -10,7 +10,7 @@
         """,
     "data": [
         "wizard/employee_timesheet_cost_import.xml",
-        "views/hr_employee_form_view.xml",],
+        "views/menu.xml",],
     "installable": True,
     "auto_install": True,
 }
