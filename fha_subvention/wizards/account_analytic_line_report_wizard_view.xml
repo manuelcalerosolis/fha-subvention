@@ -29,7 +29,7 @@
     </record>
 
     <act_window
-        id="fha_subvention.action_account_analytic_line_report_wizard"
+        id="action_account_analytic_line_report_wizard"
         name="Timesheets Report"
         res_model="account.analytic.line.report.wizard"
         view_mode="form"

@@ -18,12 +18,12 @@
     'data': [
         'security/fha_subvention_security.xml',
         'security/ir.model.access.csv',
+        'wizards/account_analytic_line_report_wizard_view.xml',
         'views/account_analytic_account_view.xml',
         'views/account_analytic_group_view.xml',
         'views/account_analytic_line_view.xml',
         'views/fha_subvention_view.xml',
         'views/project_task_view.xml',
-        'wizards/account_analytic_line_report_wizard_view.xml',
         'data/fha_subvention_data.xml',
         'data/paper_format.xml',
         'data/report_data.xml',
