@@ -1,11 +1,11 @@
 # Copyright 2022 Xtendoo
 
 {
-    "name": "Purchase subventions",
+    "name": "FHA Purchase Departments",
     "summary": """
-        Purchase-subventions""",
+        FHA Purchase Departments""",
     "version": "13.0",
-    "depends": ["purchase","fha_subvention"],
+    "depends": ["purchase","hr"],
     "maintainers": ["dariocruzmauro"],
     "author": "Xtendoo",
     "license": "AGPL-3",
