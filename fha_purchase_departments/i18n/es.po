@@ -18,7 +18,7 @@ msgstr ""
 #. module: fha_purchase_departments
 #: model:ir.model.fields,field_description:fha_purchase_departments.field_purchase_order__department_id
 msgid "Department"
-msgstr "Departmento"
+msgstr "Departamento"
 
 #. module: fha_purchase_departments
 #: model:ir.model,name:fha_purchase_departments.model_purchase_order
