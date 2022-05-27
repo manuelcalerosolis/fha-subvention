@@ -5,4 +5,5 @@ class PurchaseOrder(models.Model):
 
     department_id = fields.Many2one(
         comodel_name="hr.department",
+        required=True,
     )
